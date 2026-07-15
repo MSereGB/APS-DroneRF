@@ -1,0 +1,22 @@
+{
+  "dataset": "DroneRF",
+  "dataset_version": "f4c2b4n755/1",
+  "dataset_manifest": "dronerf_demo_v2_manifest.json",
+  "dataset_manifest_sha256": "3870a7edf0d79b5b38213afce6c206182e93374c35b06970821e67bd6598b854",
+  "partitions": [
+    "desarrollo",
+    "evaluacion"
+  ],
+  "feature_config": {
+    "fs_hz": 40000000.0,
+    "window_size": 1024,
+    "hop_size": 512,
+    "windows_per_part": 100,
+    "band_count": 20,
+    "welch_nperseg": 256,
+    "analysis_window": "hann",
+    "remove_mean": true,
+    "normalization": "maxabs",
+    "seed": 42
+  }
+}

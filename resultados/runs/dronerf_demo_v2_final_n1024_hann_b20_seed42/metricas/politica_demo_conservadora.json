@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "created_at_utc": "2026-07-14T22:02:47+00:00",
+  "source_bundle_sha256": "8c58460a49dfb94f02e47ae81a776881136df26343816988f050022e1770ceb2",
+  "guarded_bundle_sha256": "3e53a7d8ee387ee9c6f6331dfb427c023b6b044d69108501df51dec304248720",
+  "deployment_policy": {
+    "name": "conservadora_evaluacion_reservada_v1",
+    "purpose": "Limitar la interfaz a los niveles que sostienen desarrollo y evaluación.",
+    "required_parts_for_activity": [
+      "L",
+      "H"
+    ],
+    "single_part_behavior": "Conservar gráficos y características, pero informar No concluyente para evitar aplicar el umbral L/H a una única parte.",
+    "stage_reliability": {
+      "actividad": {
+        "enabled": true,
+        "rule": "Superar al Dummy en desarrollo y evaluación; en evaluación exigir al menos 6 grupos, detección >= 0,90 y falsas alarmas <= 0,10.",
+        "improved_folds": 5,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.5,
+        "development_enabled": true,
+        "reserved_evaluation_balanced_accuracy": 1.0,
+        "reserved_evaluation_groups": 12,
+        "reserved_evaluation_dummy": 0.5,
+        "reserved_evaluation_passed": true
+      },
+      "modelo": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 5,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.3333333333333333,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.16666666666666666,
+        "reserved_evaluation_groups": 9,
+        "reserved_evaluation_dummy": 0.3333333333333333,
+        "reserved_evaluation_passed": false
+      },
+      "modo_bebop": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 1,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.25,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.0,
+        "reserved_evaluation_groups": 4,
+        "reserved_evaluation_dummy": 0.25,
+        "reserved_evaluation_passed": false
+      },
+      "modo_ar": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 3,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.25,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.25,
+        "reserved_evaluation_groups": 4,
+        "reserved_evaluation_dummy": 0.25,
+        "reserved_evaluation_passed": false
+      }
+    }
+  }
+}

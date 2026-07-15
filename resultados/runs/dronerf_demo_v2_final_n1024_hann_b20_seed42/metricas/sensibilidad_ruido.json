@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "executed_at_utc": "2026-07-14T15:02:07+00:00",
+  "bundle_sha256": "f722504b72a50da19a40b49531fa8de8a9e8f4ec3bb63804cbb73bd711eaa83c",
+  "seed": 42,
+  "interpretation": "Ruido relativo agregado después de normalizar; no potencia física.",
+  "results": [
+    {
+      "snr_db": -5,
+      "accuracy": 0.3333333333333333,
+      "balanced_accuracy": 0.5555555555555556,
+      "f1_macro": 0.3142857142857143,
+      "coverage": 1.0
+    },
+    {
+      "snr_db": 0,
+      "accuracy": 0.25,
+      "balanced_accuracy": 0.5,
+      "f1_macro": 0.2,
+      "coverage": 1.0
+    },
+    {
+      "snr_db": 5,
+      "accuracy": 0.25,
+      "balanced_accuracy": 0.5,
+      "f1_macro": 0.2,
+      "coverage": 1.0
+    },
+    {
+      "snr_db": 10,
+      "accuracy": 0.5,
+      "balanced_accuracy": 0.6666666666666666,
+      "f1_macro": 0.5,
+      "coverage": 1.0
+    },
+    {
+      "snr_db": 20,
+      "accuracy": 0.9166666666666666,
+      "balanced_accuracy": 0.9444444444444444,
+      "f1_macro": 0.8991596638655461,
+      "coverage": 1.0
+    }
+  ]
+}

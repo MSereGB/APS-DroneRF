@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.1",
+  "run_id": "dronerf_demo_v2_final_n1024_hann_b20_seed42",
+  "status": "figures_exported",
+  "created_at_utc": "2026-07-14T21:58:01+00:00",
+  "git_commit": "f28983ddceb09442a1f84cbe2f1f65228a1cdbbe",
+  "source": "DroneRF",
+  "source_archive": "f4c2b4n755-1.zip",
+  "config": {
+    "dataset": "DroneRF",
+    "dataset_version": "f4c2b4n755/1",
+    "dataset_manifest": "dronerf_demo_v2_manifest.json",
+    "dataset_manifest_sha256": "3870a7edf0d79b5b38213afce6c206182e93374c35b06970821e67bd6598b854",
+    "partitions": [
+      "desarrollo",
+      "evaluacion"
+    ],
+    "feature_config": {
+      "fs_hz": 40000000.0,
+      "window_size": 1024,
+      "hop_size": 512,
+      "windows_per_part": 100,
+      "band_count": 20,
+      "welch_nperseg": 256,
+      "analysis_window": "hann",
+      "remove_mean": true,
+      "normalization": "maxabs",
+      "seed": 42
+    }
+  },
+  "counts": {
+    "files": 134,
+    "groups": 67,
+    "windows": 13400,
+    "partitions": {
+      "desarrollo": 11000,
+      "evaluacion": 2400
+    }
+  },
+  "artifacts": {
+    "features": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/features/features.csv",
+      "size_bytes": 15404409,
+      "sha256": "76b75249609ea9d1d9442405f23c6b476467a77a173d52ba8b3d7f7d5a10dd06"
+    },
+    "bundle": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/modelos/bundle.joblib",
+      "size_bytes": 13961,
+      "sha256": "8c58460a49dfb94f02e47ae81a776881136df26343816988f050022e1770ceb2"
+    },
+    "metrics": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/metricas/metricas_jerarquicas.json",
+      "size_bytes": 15971,
+      "sha256": "317769ff256d03278c46eeaf73e46955336157956f7927d40c65a08fee1c3ab9"
+    },
+    "predictions": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/predicciones_por_grupo.csv",
+      "size_bytes": 25480,
+      "sha256": "18f4408777eb036b3fb6cdbf0eec847e2db7458cb236046c5aede0e81a4a92dd"
+    },
+    "bundle_demo_conservador": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/modelos/bundle_demo_conservador.joblib",
+      "size_bytes": 14153,
+      "sha256": "3e53a7d8ee387ee9c6f6331dfb427c023b6b044d69108501df51dec304248720"
+    },
+    "politica_demo_conservadora": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/metricas/politica_demo_conservadora.json",
+      "size_bytes": 2830,
+      "sha256": "95ca4906dc8dea10439ab8eb488c869b62cad38a820d90324f913534f0d6957c"
+    },
+    "demo_metrics_conservadora_final": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/metricas/metricas_demo_conservadora_final.json",
+      "size_bytes": 871,
+      "sha256": "179a58cf9c08e06a3e40b6af9294c24e389ee71e52cb3ef0c635b5090aff3bc2"
+    },
+    "demo_predictions_conservadora_final": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/predicciones_demo_conservadora_final.csv",
+      "size_bytes": 2715,
+      "sha256": "e13b1c59b1b64277a49dd47a6de22881d961e7e536485c51d50f22b6503bce1b"
+    },
+    "figura_01_particiones_dataset": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/01_particiones_dataset.png",
+      "size_bytes": 54449,
+      "sha256": "0e84f2b78c86eb3d2bb380866853f924db363a358a927745a97592808cc87148"
+    },
+    "figura_02_comparacion_bandas": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/02_comparacion_bandas.png",
+      "size_bytes": 78843,
+      "sha256": "27b7e84e61d969c12d61f254fc2bece262e0a95eb139d6b6beb5d691b829ea90"
+    },
+    "figura_03_resultados_jerarquia": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/03_resultados_jerarquia.png",
+      "size_bytes": 76570,
+      "sha256": "6ae2dc5ca037dfa91c48fc50e0766e40c05aee1dd9861f0a95cf896b03c7e347"
+    },
+    "figura_04_resultados_muestras_excluidas": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/04_resultados_muestras_excluidas.png",
+      "size_bytes": 78025,
+      "sha256": "96212304875db1919b072bff8d73be34f000abae2e54455487e8d42cdab3260c"
+    },
+    "figura_05_sensibilidad_ruido": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/05_sensibilidad_ruido.png",
+      "size_bytes": 73243,
+      "sha256": "74b4a035c5708c2815f591aaed622ff5b5a2085102a8eb07b8f410c10fce2b62"
+    },
+    "figura_06_caracteristicas_por_grupo": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/06_caracteristicas_por_grupo.png",
+      "size_bytes": 60182,
+      "sha256": "cf0a5bed727b40d17a435b97bc8f6cf0375f194466a53f1820cfe3444793a4b2"
+    },
+    "figura_07_caso_phantom_analisis_aps": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/07_caso_phantom_analisis_aps.png",
+      "size_bytes": 638468,
+      "sha256": "10c73185a407b600008c92d78ad663bfb7febd9d2180f6d3f963eecc716b958b"
+    },
+    "figura_08_caso_phantom_decision": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/08_caso_phantom_decision.png",
+      "size_bytes": 154213,
+      "sha256": "fa0cad2b0c07e02def585ed607a46f88917501868d48f2bea13175c48cc6329c"
+    },
+    "figura_09_auditoria_robustez_detector": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/09_auditoria_robustez_detector.png",
+      "size_bytes": 232472,
+      "sha256": "8a5763871afb393fe7ff16e292b87153f3ffd599402e915b01b846cdf356f761"
+    },
+    "figura_10_controles_sinteticos_dominio": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/10_controles_sinteticos_dominio.png",
+      "size_bytes": 62018,
+      "sha256": "0c090140dec4fc62c4fb3185054110d11f0f0aaf0d2bf83d0acd429e5664b825"
+    },
+    "tabla_particiones_dataset": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/particiones_dataset.csv",
+      "size_bytes": 67,
+      "sha256": "a7d9ed1fb0c91063a317e47450a3c231d76c9409523af83130dfa043ae86214e"
+    },
+    "tabla_comparacion_bandas_final": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/comparacion_bandas_final.csv",
+      "size_bytes": 169,
+      "sha256": "04a47bb98b0d12bdf90bf799fa3698b50ce21ad5e5620fec053d58fa17d6993a"
+    },
+    "tabla_resultados_jerarquia": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/resultados_jerarquia.csv",
+      "size_bytes": 191,
+      "sha256": "d780dfc63e0e61b47953f2a56c03182a0b4032f11caa4508bef426ac0bc37530"
+    },
+    "tabla_resultados_muestras_excluidas": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/resultados_muestras_excluidas.csv",
+      "size_bytes": 84,
+      "sha256": "58537b10279c6ce2fe8e1507c67e25a97ed49eb0b03f3971abcf0e2c7b94afe5"
+    },
+    "environment_lock": {
+      "path": "requirements-lock.txt",
+      "size_bytes": 3008,
+      "sha256": "3f9af9a0c6e31d1a941a389fc920550dc8e19abe9993f1b95d5736f232147b52"
+    },
+    "case_study_aps_figure": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/07_caso_phantom_analisis_aps.png",
+      "size_bytes": 638468,
+      "sha256": "10c73185a407b600008c92d78ad663bfb7febd9d2180f6d3f963eecc716b958b"
+    },
+    "case_study_decision_figure": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/08_caso_phantom_decision.png",
+      "size_bytes": 154213,
+      "sha256": "fa0cad2b0c07e02def585ed607a46f88917501868d48f2bea13175c48cc6329c"
+    },
+    "case_study_table": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/caso_phantom_caracteristicas.csv",
+      "size_bytes": 753,
+      "sha256": "5a371bd2877a658e0bc78fa87354cb8de1247e0a6a292bf5b5f3114d88370a08"
+    },
+    "case_study_metrics": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/metricas/caso_phantom_conectado.json",
+      "size_bytes": 2774,
+      "sha256": "ff18f58391267037ab7bfe7f0ffb32f02e6383cb5f2ed98c4188cb6685de025e"
+    },
+    "robustez_nested": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/auditoria_robustez_cv_anidada.csv",
+      "size_bytes": 1023,
+      "sha256": "0ffbf0eb4ef86ab85d823c77cea7a792b3d3bbf403386f7f2f23292f5f0c54bf"
+    },
+    "robustez_permutation": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/auditoria_robustez_permuta_etiquetas.csv",
+      "size_bytes": 15428,
+      "sha256": "22aec85b2d41d8ca6f0d69e0f62481762bab93bc7892307ceda30ed7745b3b92"
+    },
+    "robustez_chunks": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/auditoria_robustez_tramos.csv",
+      "size_bytes": 437,
+      "sha256": "f40d37a9dd5089afa86c1bc713bbc383c4599314551078192daf34e0b36099a6"
+    },
+    "robustez_parts": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/auditoria_robustez_partes.csv",
+      "size_bytes": 451,
+      "sha256": "a950e141c9fdda66346991961e05e567e7c6dda62b7e00ea0771b7d35e24f4b3"
+    },
+    "robustez_parts_policy": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/auditoria_robustez_partes_politica.csv",
+      "size_bytes": 361,
+      "sha256": "3ecb9d682ccb534e36a08654fecf543332a027d69086b0b338d712b220d7e3a0"
+    },
+    "robustez_noise": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/auditoria_robustez_ruido.csv",
+      "size_bytes": 2607,
+      "sha256": "809a6ccb2bf89188c73cd085f838fd77622b0f38873d63baecf88e24b480ea80"
+    },
+    "robustez_quantization": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/auditoria_robustez_cuantizacion.csv",
+      "size_bytes": 506,
+      "sha256": "2ec7ca081d621be395f45b4c9c2e72b2c06c6c4e68f41741c00d3b3969042107"
+    },
+    "robustez_metricas": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/metricas/auditoria_robustez_detector.json",
+      "size_bytes": 336863,
+      "sha256": "9e8dbcd78aab3b7200af000feccb2dff011086a211f52968502c404f7b319349"
+    },
+    "robustez_figura": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/09_auditoria_robustez_detector.png",
+      "size_bytes": 226691,
+      "sha256": "89d7f25fb4eafa19df104e93e23fc67c7bcf361f79804a53339bc9e5167e5020"
+    },
+    "desafio_fondos_externos_tabla": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/desafio_fondos_externos.csv",
+      "size_bytes": 1381,
+      "sha256": "168910af6d0818e9b366079ff9b55519d08b41c4c75cc4c0a65c7b55aeaddf86"
+    },
+    "desafio_fondos_externos_metricas": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/metricas/desafio_fondos_externos.json",
+      "size_bytes": 647,
+      "sha256": "5b8983283c9196269232b7c24e67be1998596eb0dabc98a7500a1cfb16682939"
+    },
+    "controles_sinteticos_tabla": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/tablas/controles_sinteticos_dominio.csv",
+      "size_bytes": 581,
+      "sha256": "c6a6f905312dba4ba1aba0dca37de18018064a457bdf217b9feb3741e3955bb2"
+    },
+    "controles_sinteticos_metricas": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/metricas/controles_sinteticos_dominio.json",
+      "size_bytes": 1786,
+      "sha256": "a00920d5db27198c4c585e5e5ebc21b958632309e03a7145d16a270b1e66669d"
+    },
+    "controles_sinteticos_figura": {
+      "path": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/10_controles_sinteticos_dominio.png",
+      "size_bytes": 62018,
+      "sha256": "0c090140dec4fc62c4fb3185054110d11f0f0aaf0d2bf83d0acd429e5664b825"
+    }
+  },
+  "calibration": {
+    "development_groups": 55,
+    "evaluation_groups": 12,
+    "demo_groups_accessed": 12,
+    "n_splits": 5,
+    "selected_band_count": 20
+  },
+  "deployment_policy": {
+    "name": "conservadora_evaluacion_reservada_v1",
+    "purpose": "Limitar la interfaz a los niveles que sostienen desarrollo y evaluación.",
+    "required_parts_for_activity": [
+      "L",
+      "H"
+    ],
+    "single_part_behavior": "Conservar gráficos y características, pero informar No concluyente para evitar aplicar el umbral L/H a una única parte.",
+    "stage_reliability": {
+      "actividad": {
+        "enabled": true,
+        "rule": "Superar al Dummy en desarrollo y evaluación; en evaluación exigir al menos 6 grupos, detección >= 0,90 y falsas alarmas <= 0,10.",
+        "improved_folds": 5,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.5,
+        "development_enabled": true,
+        "reserved_evaluation_balanced_accuracy": 1.0,
+        "reserved_evaluation_groups": 12,
+        "reserved_evaluation_dummy": 0.5,
+        "reserved_evaluation_passed": true
+      },
+      "modelo": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 5,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.3333333333333333,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.16666666666666666,
+        "reserved_evaluation_groups": 9,
+        "reserved_evaluation_dummy": 0.3333333333333333,
+        "reserved_evaluation_passed": false
+      },
+      "modo_bebop": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 1,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.25,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.0,
+        "reserved_evaluation_groups": 4,
+        "reserved_evaluation_dummy": 0.25,
+        "reserved_evaluation_passed": false
+      },
+      "modo_ar": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 3,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.25,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.25,
+        "reserved_evaluation_groups": 4,
+        "reserved_evaluation_dummy": 0.25,
+        "reserved_evaluation_passed": false
+      }
+    }
+  },
+  "demo_protocols": {
+    "conservadora_final": {
+      "executed_at_utc": "2026-07-14T22:03:17+00:00",
+      "samples": 12
+    }
+  },
+  "updated_at_utc": "2026-07-14T23:37:19+00:00",
+  "case_study": {
+    "sample_sha256": "90a46d05c985c19228b2734ebfa5f5c82245398939f3ca088b0aabd7337da53e",
+    "label_accessed_after_inference": true,
+    "result": {
+      "state": "dron",
+      "model": null,
+      "mode": null
+    }
+  },
+  "robustness_audit_completed_at_utc": "2026-07-14T22:16:10+00:00",
+  "external_background_challenge_completed_at_utc": "2026-07-14T22:21:02+00:00"
+}

@@ -1,0 +1,5 @@
+ventana,ganancia_coherente,enbw_bins,enbw_hz
+rectangular,1.0,1.0,1.0
+hann,0.5,1.5,1.5
+hamming,0.54,1.3628257887517148,1.3628257887517148
+blackman,0.42,1.7267573696145122,1.7267573696145122

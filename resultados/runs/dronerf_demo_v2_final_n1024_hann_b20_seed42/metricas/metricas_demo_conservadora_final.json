@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "executed_at_utc": "2026-07-14T22:03:17+00:00",
+  "method": "Primero inferencia sin etiquetas; después unión con catálogo separado.",
+  "bundle_sha256": "3e53a7d8ee387ee9c6f6331dfb427c023b6b044d69108501df51dec304248720",
+  "activity": {
+    "accuracy": 1.0,
+    "balanced_accuracy": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0,
+    "f1_macro": 1.0,
+    "coverage": 1.0,
+    "n_groups": 12
+  },
+  "model": {
+    "accuracy": 0.0,
+    "balanced_accuracy": 0.0,
+    "precision_macro": 0.0,
+    "recall_macro": 0.0,
+    "f1_macro": 0.0,
+    "coverage": 0.0,
+    "n_groups": 9
+  },
+  "mode": {
+    "accuracy": 0.0,
+    "balanced_accuracy": 0.0,
+    "precision_macro": 0.0,
+    "recall_macro": 0.0,
+    "f1_macro": 0.0,
+    "coverage": 0.0,
+    "n_groups": 9
+  },
+  "exact_hierarchy_rate": 0.25
+}

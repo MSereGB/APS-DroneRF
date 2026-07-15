@@ -1,0 +1,463 @@
+{
+  "schema_version": "1.1",
+  "run_id": "dronerf_demo_v2_final_n1024_hann_b20_seed42",
+  "interpretation": "Separabilidad exploratoria por grupos; no detector operacional.",
+  "selection_used_only": "desarrollo",
+  "selected_band_count": 20,
+  "band_comparison": [
+    {
+      "band_count": 4,
+      "balanced_accuracy_mean": 0.5555555555555556,
+      "fold_dispersion_mean": 0.12509733205761572,
+      "stage_balanced_accuracies": [
+        0.9888888888888889,
+        0.5333333333333333,
+        0.2,
+        0.5
+      ]
+    },
+    {
+      "band_count": 10,
+      "balanced_accuracy_mean": 0.6,
+      "fold_dispersion_mean": 0.11216804947981035,
+      "stage_balanced_accuracies": [
+        1.0,
+        0.65,
+        0.3,
+        0.45000000000000007
+      ]
+    },
+    {
+      "band_count": 20,
+      "balanced_accuracy_mean": 0.6041666666666666,
+      "fold_dispersion_mean": 0.08387833004781167,
+      "stage_balanced_accuracies": [
+        1.0,
+        0.7166666666666667,
+        0.3,
+        0.4
+      ]
+    }
+  ],
+  "oof_development": {
+    "actividad": {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "f1_macro": 1.0,
+      "coverage": 1.0,
+      "rejection_rate": 0.0,
+      "n_groups": 55,
+      "detection_rate": 1.0,
+      "false_alarm_rate": 0.0,
+      "drone_group_count": 45,
+      "background_group_count": 10,
+      "detected_drone_count": 45,
+      "missed_drone_count": 0,
+      "false_alarm_count": 0,
+      "true_negative_count": 10,
+      "threshold": 0.41277036936465794,
+      "rejection_margin": 0.0,
+      "fold_balanced_accuracy": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "fold_dispersion": 0.0
+    },
+    "modelo": {
+      "accuracy": 0.5111111111111111,
+      "balanced_accuracy": 0.5833333333333334,
+      "precision_macro": 0.5744047619047619,
+      "recall_macro": 0.4375,
+      "f1_macro": 0.4739057239057239,
+      "coverage": 0.7777777777777778,
+      "rejection_rate": 0.2222222222222222,
+      "n_groups": 45,
+      "rejection_margin": 0.005752260917427643,
+      "fold_balanced_accuracy": [
+        0.75,
+        0.8333333333333334,
+        0.5,
+        0.75,
+        0.75
+      ],
+      "fold_dispersion": 0.1130388330520878
+    },
+    "modo_bebop": {
+      "accuracy": 0.25,
+      "balanced_accuracy": 0.25,
+      "precision_macro": 0.18,
+      "recall_macro": 0.2,
+      "f1_macro": 0.1638095238095238,
+      "coverage": 0.7,
+      "rejection_rate": 0.3,
+      "n_groups": 20,
+      "rejection_margin": 0.0041033249413018336,
+      "fold_balanced_accuracy": [
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+        0.5
+      ],
+      "fold_dispersion": 0.1
+    },
+    "modo_ar": {
+      "accuracy": 0.35,
+      "balanced_accuracy": 0.35,
+      "precision_macro": 0.31,
+      "recall_macro": 0.27999999999999997,
+      "f1_macro": 0.27868131868131873,
+      "coverage": 0.75,
+      "rejection_rate": 0.25,
+      "n_groups": 20,
+      "rejection_margin": 0.003660954238880687,
+      "fold_balanced_accuracy": [
+        0.25,
+        0.5,
+        0.5,
+        0.25,
+        0.5
+      ],
+      "fold_dispersion": 0.1224744871391589
+    }
+  },
+  "dummy_oof": {
+    "actividad": {
+      "accuracy": 0.8181818181818182,
+      "balanced_accuracy": 0.5,
+      "precision_macro": 0.4090909090909091,
+      "recall_macro": 0.5,
+      "f1_macro": 0.45,
+      "threshold": 0.5
+    },
+    "modelo": {
+      "accuracy": 0.4444444444444444,
+      "balanced_accuracy": 0.3333333333333333,
+      "precision_macro": 0.14814814814814814,
+      "recall_macro": 0.3333333333333333,
+      "f1_macro": 0.20512820512820515,
+      "threshold": null
+    },
+    "modo_bebop": {
+      "accuracy": 0.25,
+      "balanced_accuracy": 0.25,
+      "precision_macro": 0.0625,
+      "recall_macro": 0.25,
+      "f1_macro": 0.1,
+      "threshold": null
+    },
+    "modo_ar": {
+      "accuracy": 0.25,
+      "balanced_accuracy": 0.25,
+      "precision_macro": 0.0625,
+      "recall_macro": 0.25,
+      "f1_macro": 0.1,
+      "threshold": null
+    }
+  },
+  "reserved_evaluation": {
+    "actividad": {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "f1_macro": 1.0,
+      "coverage": 1.0,
+      "rejection_rate": 0.0,
+      "n_groups": 12,
+      "detection_rate": 1.0,
+      "false_alarm_rate": 0.0,
+      "drone_group_count": 9,
+      "background_group_count": 3,
+      "detected_drone_count": 9,
+      "missed_drone_count": 0,
+      "false_alarm_count": 0,
+      "true_negative_count": 3,
+      "threshold": 0.41277036936465794,
+      "rejection_margin": 0.0
+    },
+    "modelo": {
+      "accuracy": 0.2222222222222222,
+      "balanced_accuracy": 0.16666666666666666,
+      "precision_macro": 0.125,
+      "recall_macro": 0.125,
+      "f1_macro": 0.125,
+      "coverage": 0.5555555555555556,
+      "rejection_rate": 0.4444444444444444,
+      "n_groups": 9,
+      "rejection_margin": 0.005752260917427643
+    },
+    "modo_bebop": {
+      "accuracy": 0.0,
+      "balanced_accuracy": 0.0,
+      "precision_macro": 0.0,
+      "recall_macro": 0.0,
+      "f1_macro": 0.0,
+      "coverage": 0.5,
+      "rejection_rate": 0.5,
+      "n_groups": 4,
+      "rejection_margin": 0.0041033249413018336
+    },
+    "modo_ar": {
+      "accuracy": 0.25,
+      "balanced_accuracy": 0.25,
+      "precision_macro": 0.2,
+      "recall_macro": 0.2,
+      "f1_macro": 0.2,
+      "coverage": 0.5,
+      "rejection_rate": 0.5,
+      "n_groups": 4,
+      "rejection_margin": 0.003660954238880687
+    }
+  },
+  "thresholds": {
+    "actividad": {
+      "decision": 0.41277036936465794,
+      "rejection_margin": 0.0
+    },
+    "modelo": {
+      "decision": null,
+      "rejection_margin": 0.005752260917427643
+    },
+    "modo_bebop": {
+      "decision": null,
+      "rejection_margin": 0.0041033249413018336
+    },
+    "modo_ar": {
+      "decision": null,
+      "rejection_margin": 0.003660954238880687
+    }
+  },
+  "stage_reliability": {
+    "actividad": {
+      "enabled": true,
+      "rule": "Superar al Dummy en desarrollo y evaluación; en evaluación exigir al menos 6 grupos, detección >= 0,90 y falsas alarmas <= 0,10.",
+      "improved_folds": 5,
+      "total_folds": 5,
+      "dummy_balanced_accuracy": 0.5,
+      "development_enabled": true,
+      "reserved_evaluation_balanced_accuracy": 1.0,
+      "reserved_evaluation_groups": 12,
+      "reserved_evaluation_dummy": 0.5,
+      "reserved_evaluation_passed": true
+    },
+    "modelo": {
+      "enabled": false,
+      "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+      "improved_folds": 5,
+      "total_folds": 5,
+      "dummy_balanced_accuracy": 0.3333333333333333,
+      "development_enabled": true,
+      "reserved_evaluation_balanced_accuracy": 0.16666666666666666,
+      "reserved_evaluation_groups": 9,
+      "reserved_evaluation_dummy": 0.3333333333333333,
+      "reserved_evaluation_passed": false
+    },
+    "modo_bebop": {
+      "enabled": false,
+      "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+      "improved_folds": 1,
+      "total_folds": 5,
+      "dummy_balanced_accuracy": 0.25,
+      "development_enabled": false,
+      "reserved_evaluation_balanced_accuracy": 0.0,
+      "reserved_evaluation_groups": 4,
+      "reserved_evaluation_dummy": 0.25,
+      "reserved_evaluation_passed": false
+    },
+    "modo_ar": {
+      "enabled": false,
+      "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+      "improved_folds": 3,
+      "total_folds": 5,
+      "dummy_balanced_accuracy": 0.25,
+      "development_enabled": false,
+      "reserved_evaluation_balanced_accuracy": 0.25,
+      "reserved_evaluation_groups": 4,
+      "reserved_evaluation_dummy": 0.25,
+      "reserved_evaluation_passed": false
+    }
+  },
+  "domain_guard": {
+    "schema_version": "1.0",
+    "purpose": "Rechazar entradas fuera del dominio de calibración DroneRF.",
+    "feature_columns": [
+      "rms",
+      "potencia_media",
+      "energia",
+      "pico",
+      "factor_cresta",
+      "frecuencia_dominante_fft_hz",
+      "frecuencia_dominante_hz",
+      "psd_maxima",
+      "potencia_total_psd",
+      "centroide_espectral_hz",
+      "ancho_banda_espectral_hz",
+      "potencia_relativa_banda_1",
+      "potencia_relativa_banda_2",
+      "potencia_relativa_banda_3",
+      "potencia_relativa_banda_4",
+      "potencia_relativa_banda_5",
+      "potencia_relativa_banda_6",
+      "potencia_relativa_banda_7",
+      "potencia_relativa_banda_8",
+      "potencia_relativa_banda_9",
+      "potencia_relativa_banda_10",
+      "potencia_relativa_banda_11",
+      "potencia_relativa_banda_12",
+      "potencia_relativa_banda_13",
+      "potencia_relativa_banda_14",
+      "potencia_relativa_banda_15",
+      "potencia_relativa_banda_16",
+      "potencia_relativa_banda_17",
+      "potencia_relativa_banda_18",
+      "potencia_relativa_banda_19",
+      "potencia_relativa_banda_20"
+    ],
+    "center": {
+      "rms": 0.0061319286519392995,
+      "potencia_media": 7.034794089433458e-05,
+      "energia": 0.07203629147583991,
+      "pico": 0.020446414954039524,
+      "factor_cresta": 3.3795411047699204,
+      "frecuencia_dominante_fft_hz": 7587890.625,
+      "frecuencia_dominante_hz": 10117187.5,
+      "psd_maxima": 1.0340041726805159e-11,
+      "potencia_total_psd": 6.90634287844462e-05,
+      "centroide_espectral_hz": 10673138.844802573,
+      "ancho_banda_espectral_hz": 6253859.330053157,
+      "potencia_relativa_banda_1": 0.060391486031328524,
+      "potencia_relativa_banda_2": 0.06281954846195417,
+      "potencia_relativa_banda_3": 0.052854836868428075,
+      "potencia_relativa_banda_4": 0.0419169926972695,
+      "potencia_relativa_banda_5": 0.04114784794179655,
+      "potencia_relativa_banda_6": 0.03621037101662493,
+      "potencia_relativa_banda_7": 0.020689584703134926,
+      "potencia_relativa_banda_8": 0.015237771926101224,
+      "potencia_relativa_banda_9": 0.023478192609379375,
+      "potencia_relativa_banda_10": 0.0410267503047013,
+      "potencia_relativa_banda_11": 0.05737000269071055,
+      "potencia_relativa_banda_12": 0.05492769392217212,
+      "potencia_relativa_banda_13": 0.04805892041588253,
+      "potencia_relativa_banda_14": 0.04456277291055423,
+      "potencia_relativa_banda_15": 0.04803410355389062,
+      "potencia_relativa_banda_16": 0.05342775746970725,
+      "potencia_relativa_banda_17": 0.058646122796605776,
+      "potencia_relativa_banda_18": 0.06386577708960685,
+      "potencia_relativa_banda_19": 0.06723489642488559,
+      "potencia_relativa_banda_20": 0.0657564459635068
+    },
+    "scale": {
+      "rms": 0.010924435870596398,
+      "potencia_media": 0.00022021655358290626,
+      "energia": 0.22550175086893037,
+      "pico": 0.0378692790618436,
+      "factor_cresta": 0.038611657427005674,
+      "frecuencia_dominante_fft_hz": 2407226.5625,
+      "frecuencia_dominante_hz": 2539062.5,
+      "psd_maxima": 3.1748838331349614e-11,
+      "potencia_total_psd": 0.00021800204939434535,
+      "centroide_espectral_hz": 83243.80461012945,
+      "ancho_banda_espectral_hz": 104912.60973169468,
+      "potencia_relativa_banda_1": 0.0030550220193842695,
+      "potencia_relativa_banda_2": 0.0024779595438383373,
+      "potencia_relativa_banda_3": 0.0029120786942160998,
+      "potencia_relativa_banda_4": 0.001839858939535921,
+      "potencia_relativa_banda_5": 0.0017947428442641397,
+      "potencia_relativa_banda_6": 0.004349059974694126,
+      "potencia_relativa_banda_7": 0.006894868203427246,
+      "potencia_relativa_banda_8": 0.000881623599258325,
+      "potencia_relativa_banda_9": 0.002764908029125948,
+      "potencia_relativa_banda_10": 0.005430382600345618,
+      "potencia_relativa_banda_11": 0.006448671349301001,
+      "potencia_relativa_banda_12": 0.004081189276625513,
+      "potencia_relativa_banda_13": 0.0034632924653160563,
+      "potencia_relativa_banda_14": 0.002127501704984852,
+      "potencia_relativa_banda_15": 0.0014595735432297516,
+      "potencia_relativa_banda_16": 0.001644231550438753,
+      "potencia_relativa_banda_17": 0.0025570791304056345,
+      "potencia_relativa_banda_18": 0.0036104532905741477,
+      "potencia_relativa_banda_19": 0.002407007510927095,
+      "potencia_relativa_banda_20": 0.002894265450935976
+    },
+    "distance_metric": "rms_robust_z",
+    "threshold": 45.447869013059304,
+    "safety_factor": 1.05,
+    "development_groups": 55,
+    "development_distance_max": 43.28368477434219
+  },
+  "signal_quality_guard": {
+    "schema_version": "1.0",
+    "purpose": "Rechazar entradas con transitorios fuera del rango de desarrollo.",
+    "feature": "factor_cresta",
+    "aggregation": "mediana_por_grupo_y_parte",
+    "upper_limit": 3.750712478935781,
+    "safety_factor": 1.05,
+    "development_groups": 55,
+    "development_maximum": 3.5721071227959817
+  },
+  "deployment_policy": {
+    "name": "conservadora_evaluacion_reservada_v1",
+    "purpose": "Limitar la interfaz a los niveles que sostienen desarrollo y evaluación.",
+    "required_parts_for_activity": [
+      "L",
+      "H"
+    ],
+    "single_part_behavior": "Conservar gráficos y características, pero informar No concluyente para evitar aplicar el umbral L/H a una única parte.",
+    "stage_reliability": {
+      "actividad": {
+        "enabled": true,
+        "rule": "Superar al Dummy en desarrollo y evaluación; en evaluación exigir al menos 6 grupos, detección >= 0,90 y falsas alarmas <= 0,10.",
+        "improved_folds": 5,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.5,
+        "development_enabled": true,
+        "reserved_evaluation_balanced_accuracy": 1.0,
+        "reserved_evaluation_groups": 12,
+        "reserved_evaluation_dummy": 0.5,
+        "reserved_evaluation_passed": true
+      },
+      "modelo": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 5,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.3333333333333333,
+        "development_enabled": true,
+        "reserved_evaluation_balanced_accuracy": 0.16666666666666666,
+        "reserved_evaluation_groups": 9,
+        "reserved_evaluation_dummy": 0.3333333333333333,
+        "reserved_evaluation_passed": false
+      },
+      "modo_bebop": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 1,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.25,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.0,
+        "reserved_evaluation_groups": 4,
+        "reserved_evaluation_dummy": 0.25,
+        "reserved_evaluation_passed": false
+      },
+      "modo_ar": {
+        "enabled": false,
+        "rule": "Superar al Dummy en desarrollo y evaluación, con al menos 8 grupos reservados para mostrar la etapa en la demo.",
+        "improved_folds": 3,
+        "total_folds": 5,
+        "dummy_balanced_accuracy": 0.25,
+        "development_enabled": false,
+        "reserved_evaluation_balanced_accuracy": 0.25,
+        "reserved_evaluation_groups": 4,
+        "reserved_evaluation_dummy": 0.25,
+        "reserved_evaluation_passed": false
+      }
+    }
+  }
+}

@@ -1,0 +1,1315 @@
+{
+  "schema_version": "1.0",
+  "executed_at_utc": "2026-07-13T19:04:54+00:00",
+  "git_commit": "8a63eb6bcdf531457f69ec3f290714ab15216ef2",
+  "selection_partition": "desarrollo",
+  "evaluation_groups_accessed": 0,
+  "demo_groups_accessed": 0,
+  "rule": "Mayor exactitud balanceada media; dentro de 0.02, menor dispersión; después, configuración más simple.",
+  "selected_configuration": "n1024_hann",
+  "selected_band_count": 20,
+  "summary": [
+    {
+      "configuration": "n512_hann",
+      "display_name": "N=512\nHann",
+      "selected_band_count": 10,
+      "balanced_accuracy_mean": 0.6083333333333334,
+      "fold_dispersion_mean": 0.09380925048521932
+    },
+    {
+      "configuration": "n256_hann",
+      "display_name": "N=256\nHann",
+      "selected_band_count": 20,
+      "balanced_accuracy_mean": 0.5583333333333333,
+      "fold_dispersion_mean": 0.053259708263021954
+    },
+    {
+      "configuration": "n1024_hann",
+      "display_name": "N=1024\nHann",
+      "selected_band_count": 20,
+      "balanced_accuracy_mean": 0.6125,
+      "fold_dispersion_mean": 0.07825970826302195
+    },
+    {
+      "configuration": "n2048_hann",
+      "display_name": "N=2048\nHann",
+      "selected_band_count": 10,
+      "balanced_accuracy_mean": 0.6,
+      "fold_dispersion_mean": 0.07992580289724083
+    },
+    {
+      "configuration": "n512_hamming",
+      "display_name": "N=512\nHamming",
+      "selected_band_count": 10,
+      "balanced_accuracy_mean": 0.6083333333333334,
+      "fold_dispersion_mean": 0.11880925048521931
+    },
+    {
+      "configuration": "n512_blackman",
+      "display_name": "N=512\nBlackman",
+      "selected_band_count": 20,
+      "balanced_accuracy_mean": 0.5833333333333333,
+      "fold_dispersion_mean": 0.09444272543208321
+    }
+  ],
+  "details": {
+    "n512_hann": {
+      "band_comparison": [
+        {
+          "band_count": 4,
+          "balanced_accuracy_mean": 0.5472222222222223,
+          "fold_dispersion_mean": 0.1534424542411218,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 0.9555555555555555,
+              "fold_dispersion": 0.022222222222222233,
+              "fold_values": [
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.4833333333333334,
+              "fold_dispersion": 0.2,
+              "fold_values": [
+                0.6666666666666666,
+                0.5833333333333334,
+                0.16666666666666666,
+                0.6666666666666666,
+                0.3333333333333333
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.2,
+              "fold_dispersion": 0.10000000000000002,
+              "fold_values": [
+                0.25,
+                0.0,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.55,
+              "fold_dispersion": 0.291547594742265,
+              "fold_values": [
+                0.75,
+                0.75,
+                0.75,
+                0.5,
+                0.0
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 10,
+          "balanced_accuracy_mean": 0.6083333333333334,
+          "fold_dispersion_mean": 0.09380925048521932,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.5833333333333334,
+              "fold_dispersion": 0.25276251480171835,
+              "fold_values": [
+                0.8333333333333334,
+                0.75,
+                0.16666666666666666,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.6,
+              "fold_dispersion": 0.1224744871391589,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.75,
+                0.75,
+                0.5
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 20,
+          "balanced_accuracy_mean": 0.5833333333333334,
+          "fold_dispersion_mean": 0.10316854781667018,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.6333333333333334,
+              "fold_dispersion": 0.15456030825826172,
+              "fold_values": [
+                0.6666666666666666,
+                0.8333333333333334,
+                0.5,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.15811388300841897,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.5,
+                0.0
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.45,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.25,
+                0.5
+              ]
+            }
+          }
+        }
+      ],
+      "selected": {
+        "band_count": 10,
+        "balanced_accuracy_mean": 0.6083333333333334,
+        "fold_dispersion_mean": 0.09380925048521932,
+        "stages": {
+          "actividad": {
+            "balanced_accuracy": 1.0,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "modelo": {
+            "balanced_accuracy": 0.5833333333333334,
+            "fold_dispersion": 0.25276251480171835,
+            "fold_values": [
+              0.8333333333333334,
+              0.75,
+              0.16666666666666666,
+              0.75,
+              0.4166666666666667
+            ]
+          },
+          "modo_bebop": {
+            "balanced_accuracy": 0.25,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "modo_ar": {
+            "balanced_accuracy": 0.6,
+            "fold_dispersion": 0.1224744871391589,
+            "fold_values": [
+              0.5,
+              0.5,
+              0.75,
+              0.75,
+              0.5
+            ]
+          }
+        }
+      }
+    },
+    "n256_hann": {
+      "band_comparison": [
+        {
+          "band_count": 4,
+          "balanced_accuracy_mean": 0.5722222222222222,
+          "fold_dispersion_mean": 0.08319409547518389,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 0.9555555555555555,
+              "fold_dispersion": 0.022222222222222233,
+              "fold_values": [
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.4833333333333334,
+              "fold_dispersion": 0.11055415967851333,
+              "fold_values": [
+                0.6666666666666666,
+                0.4166666666666667,
+                0.5,
+                0.5,
+                0.3333333333333333
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.6000000000000001,
+              "fold_dispersion": 0.2,
+              "fold_values": [
+                0.75,
+                0.75,
+                0.5,
+                0.75,
+                0.25
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 10,
+          "balanced_accuracy_mean": 0.5458333333333334,
+          "fold_dispersion_mean": 0.14433413924171284,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.4833333333333334,
+              "fold_dispersion": 0.23213980461973532,
+              "fold_values": [
+                0.75,
+                0.4166666666666667,
+                0.16666666666666666,
+                0.75,
+                0.3333333333333333
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.15811388300841897,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.0,
+                0.5,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.44999999999999996,
+              "fold_dispersion": 0.18708286933869708,
+              "fold_values": [
+                0.5,
+                0.75,
+                0.5,
+                0.25,
+                0.25
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 20,
+          "balanced_accuracy_mean": 0.5583333333333333,
+          "fold_dispersion_mean": 0.053259708263021954,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.5333333333333333,
+              "fold_dispersion": 0.1130388330520878,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.44999999999999996,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        }
+      ],
+      "selected": {
+        "band_count": 20,
+        "balanced_accuracy_mean": 0.5583333333333333,
+        "fold_dispersion_mean": 0.053259708263021954,
+        "stages": {
+          "actividad": {
+            "balanced_accuracy": 1.0,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "modelo": {
+            "balanced_accuracy": 0.5333333333333333,
+            "fold_dispersion": 0.1130388330520878,
+            "fold_values": [
+              0.5,
+              0.5,
+              0.5,
+              0.75,
+              0.4166666666666667
+            ]
+          },
+          "modo_bebop": {
+            "balanced_accuracy": 0.25,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "modo_ar": {
+            "balanced_accuracy": 0.44999999999999996,
+            "fold_dispersion": 0.1,
+            "fold_values": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.25
+            ]
+          }
+        }
+      }
+    },
+    "n1024_hann": {
+      "band_comparison": [
+        {
+          "band_count": 4,
+          "balanced_accuracy_mean": 0.5180555555555555,
+          "fold_dispersion_mean": 0.11388888888888889,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 0.9555555555555555,
+              "fold_dispersion": 0.022222222222222233,
+              "fold_values": [
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.5166666666666666,
+              "fold_dispersion": 0.13333333333333333,
+              "fold_values": [
+                0.6666666666666666,
+                0.4166666666666667,
+                0.5,
+                0.6666666666666666,
+                0.3333333333333333
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.2,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.0
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.39999999999999997,
+              "fold_dispersion": 0.2,
+              "fold_values": [
+                0.75,
+                0.25,
+                0.5,
+                0.25,
+                0.25
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 10,
+          "balanced_accuracy_mean": 0.575,
+          "fold_dispersion_mean": 0.0710159539299258,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.65,
+              "fold_dispersion": 0.1615893285805443,
+              "fold_values": [
+                0.8333333333333334,
+                0.75,
+                0.5,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.4,
+              "fold_dispersion": 0.1224744871391589,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.25,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 20,
+          "balanced_accuracy_mean": 0.6125,
+          "fold_dispersion_mean": 0.07825970826302195,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.7000000000000001,
+              "fold_dispersion": 0.11303883305208781,
+              "fold_values": [
+                0.6666666666666666,
+                0.8333333333333334,
+                0.5,
+                0.75,
+                0.75
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.3,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.5
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.45000000000000007,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.25,
+                0.5
+              ]
+            }
+          }
+        }
+      ],
+      "selected": {
+        "band_count": 20,
+        "balanced_accuracy_mean": 0.6125,
+        "fold_dispersion_mean": 0.07825970826302195,
+        "stages": {
+          "actividad": {
+            "balanced_accuracy": 1.0,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "modelo": {
+            "balanced_accuracy": 0.7000000000000001,
+            "fold_dispersion": 0.11303883305208781,
+            "fold_values": [
+              0.6666666666666666,
+              0.8333333333333334,
+              0.5,
+              0.75,
+              0.75
+            ]
+          },
+          "modo_bebop": {
+            "balanced_accuracy": 0.3,
+            "fold_dispersion": 0.1,
+            "fold_values": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.5
+            ]
+          },
+          "modo_ar": {
+            "balanced_accuracy": 0.45000000000000007,
+            "fold_dispersion": 0.1,
+            "fold_values": [
+              0.5,
+              0.5,
+              0.5,
+              0.25,
+              0.5
+            ]
+          }
+        }
+      }
+    },
+    "n2048_hann": {
+      "band_comparison": [
+        {
+          "band_count": 4,
+          "balanced_accuracy_mean": 0.5263888888888889,
+          "fold_dispersion_mean": 0.09207587677784002,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 0.9555555555555555,
+              "fold_dispersion": 0.022222222222222233,
+              "fold_values": [
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.5,
+              "fold_dispersion": 0.22360679774997896,
+              "fold_values": [
+                0.75,
+                0.4166666666666667,
+                0.16666666666666666,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.4,
+              "fold_dispersion": 0.1224744871391589,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.25,
+                0.25
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 10,
+          "balanced_accuracy_mean": 0.6,
+          "fold_dispersion_mean": 0.07992580289724083,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.65,
+              "fold_dispersion": 0.1615893285805443,
+              "fold_values": [
+                0.8333333333333334,
+                0.75,
+                0.5,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.5,
+              "fold_dispersion": 0.15811388300841897,
+              "fold_values": [
+                0.75,
+                0.5,
+                0.25,
+                0.5,
+                0.5
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 20,
+          "balanced_accuracy_mean": 0.5625,
+          "fold_dispersion_mean": 0.11789845892077917,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.7000000000000001,
+              "fold_dispersion": 0.17159383568311665,
+              "fold_values": [
+                0.75,
+                0.9166666666666666,
+                0.5,
+                0.8333333333333334,
+                0.5
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.2,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.0
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.35,
+              "fold_dispersion": 0.2,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.25,
+                0.0,
+                0.5
+              ]
+            }
+          }
+        }
+      ],
+      "selected": {
+        "band_count": 10,
+        "balanced_accuracy_mean": 0.6,
+        "fold_dispersion_mean": 0.07992580289724083,
+        "stages": {
+          "actividad": {
+            "balanced_accuracy": 1.0,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "modelo": {
+            "balanced_accuracy": 0.65,
+            "fold_dispersion": 0.1615893285805443,
+            "fold_values": [
+              0.8333333333333334,
+              0.75,
+              0.5,
+              0.75,
+              0.4166666666666667
+            ]
+          },
+          "modo_bebop": {
+            "balanced_accuracy": 0.25,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "modo_ar": {
+            "balanced_accuracy": 0.5,
+            "fold_dispersion": 0.15811388300841897,
+            "fold_values": [
+              0.75,
+              0.5,
+              0.25,
+              0.5,
+              0.5
+            ]
+          }
+        }
+      }
+    },
+    "n512_hamming": {
+      "band_comparison": [
+        {
+          "band_count": 4,
+          "balanced_accuracy_mean": 0.5430555555555555,
+          "fold_dispersion_mean": 0.1240969902249041,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 0.9555555555555555,
+              "fold_dispersion": 0.022222222222222233,
+              "fold_values": [
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.4666666666666666,
+              "fold_dispersion": 0.18708286933869708,
+              "fold_values": [
+                0.5833333333333334,
+                0.5833333333333334,
+                0.16666666666666666,
+                0.6666666666666666,
+                0.3333333333333333
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.2,
+              "fold_dispersion": 0.10000000000000002,
+              "fold_values": [
+                0.25,
+                0.0,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.55,
+              "fold_dispersion": 0.18708286933869706,
+              "fold_values": [
+                0.5,
+                0.75,
+                0.75,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 10,
+          "balanced_accuracy_mean": 0.6083333333333334,
+          "fold_dispersion_mean": 0.11880925048521931,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.5833333333333334,
+              "fold_dispersion": 0.25276251480171835,
+              "fold_values": [
+                0.8333333333333334,
+                0.75,
+                0.16666666666666666,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.2,
+              "fold_dispersion": 0.10000000000000002,
+              "fold_values": [
+                0.25,
+                0.0,
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.65,
+              "fold_dispersion": 0.1224744871391589,
+              "fold_values": [
+                0.5,
+                0.75,
+                0.75,
+                0.75,
+                0.5
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 20,
+          "balanced_accuracy_mean": 0.5833333333333334,
+          "fold_dispersion_mean": 0.10085262861494368,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.6333333333333334,
+              "fold_dispersion": 0.14529663145135577,
+              "fold_values": [
+                0.75,
+                0.75,
+                0.5,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.15811388300841897,
+              "fold_values": [
+                0.25,
+                0.25,
+                0.25,
+                0.5,
+                0.0
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.45,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.25,
+                0.5
+              ]
+            }
+          }
+        }
+      ],
+      "selected": {
+        "band_count": 10,
+        "balanced_accuracy_mean": 0.6083333333333334,
+        "fold_dispersion_mean": 0.11880925048521931,
+        "stages": {
+          "actividad": {
+            "balanced_accuracy": 1.0,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "modelo": {
+            "balanced_accuracy": 0.5833333333333334,
+            "fold_dispersion": 0.25276251480171835,
+            "fold_values": [
+              0.8333333333333334,
+              0.75,
+              0.16666666666666666,
+              0.75,
+              0.4166666666666667
+            ]
+          },
+          "modo_bebop": {
+            "balanced_accuracy": 0.2,
+            "fold_dispersion": 0.10000000000000002,
+            "fold_values": [
+              0.25,
+              0.0,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "modo_ar": {
+            "balanced_accuracy": 0.65,
+            "fold_dispersion": 0.1224744871391589,
+            "fold_values": [
+              0.5,
+              0.75,
+              0.75,
+              0.75,
+              0.5
+            ]
+          }
+        }
+      }
+    },
+    "n512_blackman": {
+      "band_comparison": [
+        {
+          "band_count": 4,
+          "balanced_accuracy_mean": 0.5013888888888889,
+          "fold_dispersion_mean": 0.10407263626112445,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 0.9555555555555555,
+              "fold_dispersion": 0.022222222222222233,
+              "fold_values": [
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                0.9444444444444444,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.45,
+              "fold_dispersion": 0.1715938356831167,
+              "fold_values": [
+                0.5833333333333334,
+                0.5833333333333334,
+                0.16666666666666666,
+                0.5833333333333334,
+                0.3333333333333333
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.15,
+              "fold_dispersion": 0.12247448713915891,
+              "fold_values": [
+                0.25,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.44999999999999996,
+              "fold_dispersion": 0.1,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.25
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 10,
+          "balanced_accuracy_mean": 0.5583333333333333,
+          "fold_dispersion_mean": 0.09380925048521932,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.5833333333333334,
+              "fold_dispersion": 0.25276251480171835,
+              "fold_values": [
+                0.8333333333333334,
+                0.75,
+                0.16666666666666666,
+                0.75,
+                0.4166666666666667
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.15,
+              "fold_dispersion": 0.12247448713915891,
+              "fold_values": [
+                0.25,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.5,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ]
+            }
+          }
+        },
+        {
+          "band_count": 20,
+          "balanced_accuracy_mean": 0.5833333333333333,
+          "fold_dispersion_mean": 0.09444272543208321,
+          "stages": {
+            "actividad": {
+              "balanced_accuracy": 1.0,
+              "fold_dispersion": 0.0,
+              "fold_values": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "modelo": {
+              "balanced_accuracy": 0.6833333333333332,
+              "fold_dispersion": 0.09718253158075502,
+              "fold_values": [
+                0.6666666666666666,
+                0.75,
+                0.5,
+                0.75,
+                0.75
+              ]
+            },
+            "modo_bebop": {
+              "balanced_accuracy": 0.25,
+              "fold_dispersion": 0.15811388300841897,
+              "fold_values": [
+                0.25,
+                0.0,
+                0.25,
+                0.5,
+                0.25
+              ]
+            },
+            "modo_ar": {
+              "balanced_accuracy": 0.4,
+              "fold_dispersion": 0.1224744871391589,
+              "fold_values": [
+                0.25,
+                0.5,
+                0.5,
+                0.25,
+                0.5
+              ]
+            }
+          }
+        }
+      ],
+      "selected": {
+        "band_count": 20,
+        "balanced_accuracy_mean": 0.5833333333333333,
+        "fold_dispersion_mean": 0.09444272543208321,
+        "stages": {
+          "actividad": {
+            "balanced_accuracy": 1.0,
+            "fold_dispersion": 0.0,
+            "fold_values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "modelo": {
+            "balanced_accuracy": 0.6833333333333332,
+            "fold_dispersion": 0.09718253158075502,
+            "fold_values": [
+              0.6666666666666666,
+              0.75,
+              0.5,
+              0.75,
+              0.75
+            ]
+          },
+          "modo_bebop": {
+            "balanced_accuracy": 0.25,
+            "fold_dispersion": 0.15811388300841897,
+            "fold_values": [
+              0.25,
+              0.0,
+              0.25,
+              0.5,
+              0.25
+            ]
+          },
+          "modo_ar": {
+            "balanced_accuracy": 0.4,
+            "fold_dispersion": 0.1224744871391589,
+            "fold_values": [
+              0.25,
+              0.5,
+              0.5,
+              0.25,
+              0.5
+            ]
+          }
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "summary": {
+      "path": "resultados/runs/sensibilidad_configuraciones/resumen_configuraciones.csv",
+      "sha256": "ce9d2de8bc996ad144d64dbe3c409d2b40f171ce8b5047c8ef0fe7d72e1e2ce7"
+    },
+    "figure": {
+      "path": "resultados/runs/sensibilidad_configuraciones/sensibilidad_configuraciones.png",
+      "sha256": "c60fa9d14e4f80ab44204958227923b4688d4b4363ae44580015f0b297b137c8"
+    }
+  }
+}

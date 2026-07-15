@@ -1,0 +1,3 @@
+Filtro,Cantidad de ceros,Cantidad de polos,Radio máximo de polo,Error H(z) vs freqz
+FIR,400,0,,
+IIR,8,8,0.9562081109367486,4.883031468509616e-13

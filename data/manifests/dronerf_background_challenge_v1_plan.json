@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "status": "selection_frozen_before_inference",
+  "purpose": "Ampliar la prueba de falsas alarmas del detector binario sin recalibrarlo.",
+  "dataset": "DroneRF",
+  "code": "00000",
+  "expected_activity": "fondo",
+  "segments": [21, 22, 23, 24, 25],
+  "parts": ["L", "H"],
+  "source_archives": ["RF Data_00000_L2.rar", "FR Data_00000_H2.rar"],
+  "separation": {
+    "not_in_development": true,
+    "not_in_reserved_evaluation": true,
+    "not_in_demo_packages": true,
+    "not_used_for_features_bands_thresholds_or_models": true
+  },
+  "data_location": "Externo a Git; los hashes se guardan solo en los artefactos de la corrida."
+}

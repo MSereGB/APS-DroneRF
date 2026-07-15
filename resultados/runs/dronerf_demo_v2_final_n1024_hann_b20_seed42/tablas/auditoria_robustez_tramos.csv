@@ -1,0 +1,5 @@
+accuracy,balanced_accuracy,precision_macro,recall_macro,f1_macro,n_groups,background_groups,drone_groups,false_alarm_count,false_alarm_rate,missed_drone_count,missed_drone_rate,detection_rate,coverage,chunk,windows_per_part
+1.0,1.0,1.0,1.0,1.0,12,3,9,0,0.0,0,0.0,1.0,1.0,1,25
+1.0,1.0,1.0,1.0,1.0,12,3,9,0,0.0,0,0.0,1.0,1.0,2,25
+1.0,1.0,1.0,1.0,1.0,12,3,9,0,0.0,0,0.0,1.0,1.0,3,25
+1.0,1.0,1.0,1.0,1.0,12,3,9,0,0.0,0,0.0,1.0,1.0,4,25

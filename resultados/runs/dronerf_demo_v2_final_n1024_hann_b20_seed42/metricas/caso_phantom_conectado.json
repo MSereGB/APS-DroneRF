@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-07-14T22:03:48+00:00",
+  "method": "Inferencia sin etiqueta seguida de consulta separada del catálogo.",
+  "sample": {
+    "path": "muestras_demo/phantom/conectado/muestra_01.npz",
+    "size_bytes": 229747,
+    "sha256": "90a46d05c985c19228b2734ebfa5f5c82245398939f3ca088b0aabd7337da53e"
+  },
+  "bundle": {
+    "path": "resultados/runs/actual/modelos/bundle_demo_conservador.joblib",
+    "size_bytes": 14153,
+    "sha256": "3e53a7d8ee387ee9c6f6331dfb427c023b6b044d69108501df51dec304248720"
+  },
+  "window_index": 50,
+  "fs_hz": 40000000.0,
+  "inference_before_label": {
+    "state": "dron",
+    "model": null,
+    "mode": null,
+    "drone_score": 0.8388983304188569,
+    "threshold": 0.41277036936465794,
+    "margin": 0.4261279610541989,
+    "activity_hypotheses": [
+      {
+        "name": "Actividad de dron",
+        "key": "dron",
+        "score": 0.8388983304188569
+      },
+      {
+        "name": "Sin dron",
+        "key": "fondo",
+        "score": 0.16110166958114308
+      }
+    ],
+    "model_hypotheses": [
+      {
+        "name": "Phantom",
+        "key": "phantom",
+        "score": 0.3650120926560618
+      },
+      {
+        "name": "Bebop",
+        "key": "bebop",
+        "score": 0.312219030165529
+      },
+      {
+        "name": "AR",
+        "key": "ar",
+        "score": 0.31003903893292073
+      }
+    ],
+    "mode_hypotheses": [],
+    "last_reliable_level": "actividad",
+    "domain_compatible": true,
+    "domain_distance": 1.0550337720147174,
+    "domain_threshold": 45.447869013059304,
+    "quality_compatible": true,
+    "crest_maximum": 3.4491204648568794,
+    "crest_upper_limit": 3.750712478935781,
+    "crest_parts_exceeding": [],
+    "model_margin": 0.05279306249053284,
+    "stopped_reason": "La actividad sí está respaldada, pero la identificación de modelo no pasó la verificación reservada. La aplicación no fuerza un modelo."
+  },
+  "expected_after_inference": {
+    "activity": "dron",
+    "model": "phantom",
+    "mode": "conectado",
+    "code": "11000"
+  },
+  "matches_expected": {
+    "activity": true,
+    "model": null,
+    "mode": null
+  },
+  "diagnostics_by_part": {
+    "L": {
+      "piso_psd_db_rel": -139.4659884730367,
+      "pico_psd_db_rel": -136.64632376500572,
+      "contraste_pico_piso_db": 2.8196647080309845,
+      "frecuencia_pico_fft_hz": 19423828.125,
+      "frecuencia_pico_welch_hz": 5000000.0
+    },
+    "H": {
+      "piso_psd_db_rel": -122.48786256453684,
+      "pico_psd_db_rel": -119.2299023946579,
+      "contraste_pico_piso_db": 3.2579601698789418,
+      "frecuencia_pico_fft_hz": 15908203.125,
+      "frecuencia_pico_welch_hz": 5000000.0
+    }
+  }
+}

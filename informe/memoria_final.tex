@@ -1,0 +1,982 @@
+% !TEX root = memoria_final.tex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tocloft}
+
+\geometry{margin=2.35cm}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\setlist{itemsep=0.25em,topsep=0.35em}
+\setlength{\cftsecnumwidth}{2.3em}
+\captionsetup[figure]{justification=centering,singlelinecheck=false,font=small}
+\graphicspath{
+  {informe/assets/}
+  {assets/}
+  {../resultados/figures/}
+  {../resultados/runs/sensibilidad_configuraciones/}
+  {../resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/}
+  {../resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/auditorias/estresores_entrada_v1/}
+  {../output/playwright/}
+  {resultados/figures/}
+  {resultados/runs/sensibilidad_configuraciones/}
+  {resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/figuras/}
+  {resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/auditorias/estresores_entrada_v1/}
+  {output/playwright/}
+}
+
+\definecolor{rosaAPS}{HTML}{E8559D}
+\definecolor{violetaAPS}{HTML}{7755C7}
+\definecolor{azulAPS}{HTML}{58AEDA}
+\definecolor{grisCaratula}{HTML}{555555}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=violetaAPS,
+  citecolor=violetaAPS,
+  urlcolor=azulAPS,
+  pdftitle={Detección de actividad de drones a partir de señales RF públicas},
+  pdfauthor={María Serena Gil}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Trabajo Final}
+\rhead{María Serena Gil}
+\cfoot{\thepage}
+\setlength{\headheight}{14pt}
+
+\newcommand{\figura}[4][0.92]{%
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#1\linewidth]{#2}
+    \caption{#3}\label{#4}
+  \end{figure}
+}
+
+\newcommand{\resultado}[1]{\textcolor{violetaAPS}{\textbf{#1}}}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{-1cm}
+\noindent\hspace*{-0.65cm}%
+\includegraphics[width=0.28\textwidth]{ecyt_unsam_wordmark.png}\par
+\vspace{1.2cm}
+\begin{center}
+\includegraphics[width=0.30\textwidth]{ecyt_unsam_logo.png}\par
+\vspace{0.85cm}
+\color{grisCaratula}
+{\Large\bfseries Trabajo Final de\par}
+{\Large\bfseries Análisis y Procesamiento de Señales:\par}
+\vspace{0.65cm}
+{\Large\itshape ``Detección de actividad de drones a partir de señales RF públicas''\par}
+\vspace{0.75cm}
+{\large Universidad Nacional de San Martín\par}
+{\large Ingeniería Electrónica\par}
+\vspace{0.9cm}
+{\normalsize Docentes: Mariano Llamedo Soria, Francisco Hernán Ledesma,\par}
+{\normalsize David Ezequiel Benoit\par}
+\vspace{0.75cm}
+{\large María Serena Gil\par}
+\vspace{0.55cm}
+{\normalsize masegil@estudiantes.unsam.edu.ar\par}
+\vspace{0.8cm}
+{\normalsize Julio 2026\par}
+\end{center}
+\end{titlepage}
+\hypersetup{pageanchor=true}
+
+\clearpage
+\begingroup
+\footnotesize
+\setlength{\parskip}{0pt}
+\tableofcontents
+\endgroup
+\clearpage
+
+\begin{abstract}
+Este trabajo analiza señales de radiofrecuencia del dataset público DroneRF mediante
+herramientas de Análisis y Procesamiento de Señales. Se comparan registros de fondo y de
+actividad de dron en los dominios temporal y frecuencial mediante DFT/FFT, periodograma,
+densidad espectral de potencia por Welch, ventaneo, relleno con ceros, potencia relativa
+por bandas y filtros digitales FIR e IIR vinculados con la Transformada Z. Las herramientas
+se verifican primero con señales sintéticas de frecuencia y relación señal--ruido conocidas.
+Luego se procesan 158 archivos reales correspondientes a 79 grupos, separados antes de
+generar ventanas en 55 grupos de desarrollo, 12 de evaluación y 12 de demostración. Como
+comprobación secundaria se evalúa una jerarquía lineal para distinguir fondo o actividad de
+dron y, cuando la evidencia lo permite, proponer modelo y modo de operación. La separación
+binaria se sostuvo dentro del subconjunto y del sistema de adquisición de DroneRF; modelo y
+modo no conservaron el mismo desempeño en los grupos reservados. Una aplicación local
+reproduce progresivamente archivos previamente normalizados y muestra las etapas del
+procesamiento. Las amplitudes y potencias son relativas, por lo que los resultados no
+representan potencia física ni el funcionamiento de un detector operacional.
+\end{abstract}
+
+\clearpage
+
+\section{Introducción}
+
+Los drones comerciales utilizan enlaces inalámbricos para control, telemetría y video.
+Esos enlaces producen actividad de radiofrecuencia que puede estudiarse con técnicas de
+procesamiento digital de señales. En este trabajo se utilizan registros públicos de
+DroneRF para organizar señales discretas, reconstruir ejes temporales y frecuenciales,
+aplicar FFT, estimar la densidad espectral de potencia, estudiar el ventaneo y diseñar
+filtros digitales.
+
+El análisis se desarrolla sobre los contenidos de Análisis y Procesamiento de Señales y
+compara registros de fondo con registros que contienen actividad de dron. Las
+características y la validación por grupos se incorporan al final como una comprobación
+cuantitativa de las diferencias observadas, sin reemplazar el análisis temporal y
+espectral que estructura el trabajo.
+
+Todo el desarrollo fue implementado en Python y Jupyter Notebook, y está disponible en
+el siguiente repositorio de GitHub: \url{https://github.com/MSereGB/APS-DroneRF}.
+
+\subsection{Objetivos}
+
+\begin{itemize}
+  \item Organizar y procesar señales RF públicas sin depender de una adquisición propia.
+  \item Verificar FFT, PSD, Welch, ventaneo, ruido, muestreo y cuantización con señales conocidas.
+  \item Distinguir el efecto visual del relleno con ceros de la resolución física de la observación.
+  \item Comparar fondo y actividad de dron en tiempo, frecuencia y potencia relativa por bandas.
+  \item Diseñar filtros FIR e IIR y relacionarlos con $H(z)$, polos, ceros y estabilidad.
+  \item Extraer características interpretables y evaluar su separabilidad sin mezclar grupos.
+  \item Construir una demostración local que reproduzca progresivamente archivos de señales RF.
+\end{itemize}
+
+\subsection{Alcance}
+
+El trabajo se realizó con señales RF públicas de DroneRF, organizadas en grupos originales
+con partes L/H y separadas en desarrollo, evaluación y muestras excluidas. Cada registro se
+procesó de forma incremental, removiendo su media y normalizando la amplitud para comparar
+formas y potencias relativas. Se aplicaron segmentación, análisis temporal, FFT,
+periodograma, PSD por Welch, ventaneo, relleno con ceros, integración por bandas y filtros FIR
+e IIR. También se extrajeron características simples y se evaluó su separabilidad mediante
+particiones por grupos. La aplicación local reproduce archivos como una simulación de
+adquisición y muestra las etapas del procesamiento sobre la señal cargada.
+
+\section{Fundamentos Teóricos}
+
+Las señales de DroneRF se tratan como secuencias discretas $x[n]$ muestreadas a frecuencia
+$f_s$. El período de muestreo es $T_s=1/f_s$, una ventana de $N$ muestras representa una
+duración $T=N/f_s$ y la separación entre bins de la DFT es:
+
+\begin{equation}
+\Delta f=\frac{f_s}{N}.
+\end{equation}
+
+Antes de comparar registros, se remueve la media y se normaliza cada señal por su máximo
+absoluto. Esta operación preserva la forma relativa de cada registro y evita interpretar
+la amplitud como una medición de potencia física:
+
+\begin{equation}
+x_{\mathrm{norm}}[n] = \frac{x[n]-\overline{x}}{\max_n |x[n]-\overline{x}|}.
+\end{equation}
+
+La Transformada Discreta de Fourier se define como \cite{oppenheim}:
+
+\begin{equation}
+X[k]=\sum_{n=0}^{N-1}x[n]e^{-j2\pi kn/N}.
+\end{equation}
+
+La FFT es un algoritmo eficiente para obtener $X[k]$. Para una ventana $w[n]$, el tramo
+analizado es $x_w[n]=x[n]w[n]$. El periodograma estima la densidad espectral de potencia
+(PSD) a partir de ese único tramo. Con la normalización usada por las funciones de SciPy,
+su forma general es:
+
+\begin{equation}
+\widehat{S}_{xx}(f_k)=
+\frac{1}{f_s\sum_{n=0}^{N-1}w^2[n]}
+\left|\sum_{n=0}^{N-1}x[n]w[n]e^{-j2\pi kn/N}\right|^2.
+\end{equation}
+
+Para señales reales se utiliza la representación unilateral y se conserva la potencia
+equivalente del espectro bilateral. Welch divide la señal en varios tramos, aplica una
+ventana a cada uno y promedia sus periodogramas. De esta manera reduce la variación de la
+estimación, aunque la menor longitud de cada tramo y el ventaneo modifican la resolución
+\cite{welch}:
+
+\begin{equation}
+\widehat{S}_{xx,\mathrm{Welch}}(f)=\frac{1}{M}\sum_{m=1}^{M}\widehat{S}_{xx,m}(f).
+\end{equation}
+
+La observación finita de una señal equivale a multiplicarla por una ventana. La ventana
+rectangular conserva un lóbulo principal angosto, pero tiene lóbulos laterales altos. Las
+ventanas Hann, Hamming y Blackman cambian el compromiso entre resolución y fuga espectral
+\cite{harris}. En el flujo final se usa Hann, elegida con datos de desarrollo.
+
+Para comparar amplitudes después del ventaneo se usa la ganancia coherente
+$G_c=N^{-1}\sum_n w[n]$. El ancho de banda equivalente de ruido, expresado en bins, es:
+
+\begin{equation}
+\mathrm{ENBW}=\frac{N\sum_n w^2[n]}{\left(\sum_n w[n]\right)^2}.
+\end{equation}
+
+Las medidas temporales básicas incluyen energía, potencia media y valor eficaz (RMS):
+
+\begin{equation}
+E=\sum_n |x[n]|^2,\qquad
+P_{\mathrm{media}}=\frac{1}{N}\sum_n |x[n]|^2,\qquad
+\mathrm{RMS}=\sqrt{P_{\mathrm{media}}}.
+\end{equation}
+
+El factor de cresta relaciona el máximo con el RMS. Para describir la distribución
+frecuencial se emplean el centroide y el ancho de banda espectral:
+
+\begin{equation}
+C_f=\frac{\max_n|x[n]|}{\mathrm{RMS}},\qquad
+f_c=\frac{\sum_k f_k S_{xx}[k]}{\sum_k S_{xx}[k]},\qquad
+B=\sqrt{\frac{\sum_k(f_k-f_c)^2S_{xx}[k]}{\sum_kS_{xx}[k]}}.
+\end{equation}
+
+Para resumir la PSD se integra su área dentro de bandas y se divide por la potencia total.
+Así, la potencia relativa de la banda $B_i$ es:
+
+\begin{equation}
+p_i=\frac{\int_{B_i} S_{xx}(f)\,df}{\int S_{xx}(f)\,df}.
+\end{equation}
+
+El relleno con ceros, también llamado \emph{zero padding}, agrega ceros al final de una
+ventana antes de calcular la FFT. La separación de la grilla pasa a
+$\Delta f_{\mathrm{grilla}}=f_s/N_{\mathrm{FFT}}$, pero no aumenta el tiempo observado ni
+la capacidad física de separar componentes próximas. En las simulaciones con ruido se usa
+una relación señal--ruido (SNR) controlada,
+$\mathrm{SNR}=10\log_{10}(P_s/P_n)$, donde $P_s$ y $P_n$ son las potencias de señal y
+ruido.
+
+Un filtro digital de respuesta finita al impulso (FIR) o de respuesta infinita al impulso
+(IIR) queda descrito por:
+
+\begin{equation}
+H(z)=\frac{\sum_{k=0}^{M}b_k z^{-k}}{\sum_{k=0}^{P}a_k z^{-k}}.
+\end{equation}
+
+Los ceros son las raíces del numerador y los polos son las raíces del denominador. Para un
+IIR causal, los polos estrictamente dentro del círculo unitario indican estabilidad. La
+respuesta en frecuencia se obtiene al evaluar $H(z)$ sobre $z=e^{j\omega}$.
+
+La evaluación binaria usa exactitud balanceada, que da el mismo peso a fondo y dron aun
+cuando las cantidades sean diferentes:
+
+\begin{equation}
+\mathrm{BA}=\frac{1}{2}\left(\frac{TP}{TP+FN}+\frac{TN}{TN+FP}\right).
+\end{equation}
+
+\section{Dataset y particiones}
+
+DroneRF contiene registros de fondo y señales asociadas a tres modelos: Bebop, AR Drone
+y Phantom. Bebop y AR tienen cuatro modos (conectado, vuelo estacionario, vuelo y video). Phantom
+solo tiene el modo conectado en esta versión del dataset \cite{alsaad,dronerf}.
+
+\begin{table}[H]
+\centering
+\caption{Etiquetas utilizadas del dataset DroneRF.}
+\begin{tabular}{lll}
+\toprule
+Código & Modelo & Modo \\
+\midrule
+\texttt{00000} & Sin dron & Fondo \\
+\texttt{10000} & Bebop & Conectado \\
+\texttt{10001} & Bebop & Vuelo estacionario \\
+\texttt{10010} & Bebop & Vuelo \\
+\texttt{10011} & Bebop & Video \\
+\texttt{10100} & AR & Conectado \\
+\texttt{10101} & AR & Vuelo estacionario \\
+\texttt{10110} & AR & Vuelo \\
+\texttt{10111} & AR & Video \\
+\texttt{11000} & Phantom & Conectado \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las letras L y H provienen de \emph{low band} y \emph{high band}. En la adquisición
+original se usaron dos receptores NI-USRP-2943R en simultáneo: como cada receptor puede
+capturar 40 MHz instantáneos, uno registró la mitad inferior del espectro Wi-Fi y el otro
+la mitad superior, completando 80 MHz \cite{alsaad}. Así, en un nombre como
+\path{11000L_3.csv}, L identifica la subbanda baja de 2.400 a 2.440 GHz; H identifica la
+subbanda alta de 2.440 a 2.480 GHz. No son modelos de dron, modos de operación ni dos
+tramos temporales consecutivos: son dos mediciones simultáneas y complementarias del mismo
+experimento.
+
+El código oficial calcula el espectro de cada banda y concatena L con H, ajustando la
+continuidad de amplitud, para visualizar el intervalo completo de 2.400 a 2.480 GHz
+\cite{codigo}. En este trabajo se preservan las dos bandas por separado para el análisis
+temporal y espectral de cada archivo, y las predicciones se resumen primero por banda y
+luego se combinan con igual peso. Esto mantiene la trazabilidad de la adquisición y evita
+perder actividad que podría ocupar solamente una de las dos mitades del espectro. Por esa
+misma razón L y H comparten \texttt{group\_id} y partición; una banda aislada puede
+mostrarse para analizar su forma de onda o su PSD, pero no habilita por sí sola una decisión
+de actividad.
+
+La partición se congeló antes de calibrar:
+
+\begin{table}[H]
+\centering
+\caption{Composición del subconjunto multiclase DroneRF v2.}
+\begin{tabular}{lrrr}
+\toprule
+Partición & Grupos & Archivos L/H & Uso \\
+\midrule
+Desarrollo & 55 & 110 & Selección, particiones y umbrales \\
+Evaluación reservada & 12 & 24 & Una evaluación final \\
+Muestras excluidas & 12 & 24 & Demostración desde archivos no entrenados \\
+\midrule
+Total & 79 & 158 & 14,07 GiB (15,11 GB) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Los 158 archivos tienen hash SHA-256 y etiquetas explícitas en
+\path{data/manifests/dronerf_demo_v2_manifest.json}. La frecuencia de muestreo usada para
+las partes crudas L/H es 40 MHz, de acuerdo con la documentación y el código asociado al
+dataset. El eje positivo se representa entre 0 y 20 MHz sin atribuir una portadora física.
+
+\figura[0.76]{01_particiones_dataset.png}{Cantidad de grupos originales en cada partición. La separación se realiza antes de generar ventanas.}{fig:particiones}
+
+La figura muestra que los grupos se asignaron a una única partición antes de segmentar los
+archivos. Como las ventanas L/H de un mismo segmento conservan el mismo identificador, la
+comparación posterior entre desarrollo, evaluación y demostración no usa tramos derivados
+del mismo registro en dos etapas distintas.
+
+\section{Metodología}
+
+\subsection{Organización del desarrollo}
+
+El desarrollo se organizó en Python y Jupyter Notebook. Los notebooks presentan el
+recorrido de forma lineal: verificaciones sintéticas, exploración del dataset, tiempo y
+frecuencia, ventaneo y bandas, filtros digitales, características y resultados finales.
+Las funciones repetidas se mantienen en módulos reutilizables y los scripts permiten
+repetir la preparación de datos, la extracción de características, la evaluación y la
+exportación de figuras sin depender de una ejecución manual del notebook.
+
+\subsection{Preprocesamiento y segmentación}
+
+Cada CSV se procesa de forma incremental. Se remueve la media y se divide por el máximo
+absoluto del registro. La configuración final usa $N=1024$, salto de 512 muestras, ventana
+Hann y 100 ventanas distribuidas de forma determinística por cada parte. Se obtienen 200
+ventanas por grupo. La corrida de desarrollo y evaluación contiene 13.400 ventanas de 67
+grupos; las 12 muestras de demostración se procesan aparte.
+
+La normalización por registro permite comparar formas relativas, pero elimina diferencias
+de escala absoluta. Es una decisión coherente con la ausencia de calibración instrumental.
+
+\subsection{Características interpretables}
+
+Por ventana se calculan RMS, energía, potencia media, pico, factor de cresta, frecuencia
+dominante, máximo y potencia total de PSD, centroide espectral, ancho de banda y potencia
+relativa por bandas. Welch usa tramos de 256 muestras. Se probaron particiones de 4, 10 y
+20 bandas uniformes sobre 0--20 MHz; las cuatro bandas de 5 MHz se mantienen para explicar
+los ejemplos y las 20 bandas de 1 MHz se usan en la configuración calibrada.
+
+\subsection{Protocolo por grupos}
+
+La evaluación se implementa mediante exclusión completa por grupos. Los 55 grupos de
+desarrollo se dividen cinco veces, manteniendo proporciones de clase y evitando que las
+ventanas de un mismo segmento aparezcan a ambos lados de una partición. En cada repetición,
+la normalización de las características se ajusta solamente con los grupos de
+entrenamiento. Como referencia se usa un clasificador que no aprende de las características;
+el modelo de comparación es una regresión logística lineal con pesos balanceados. Este
+esquema toma como punto de partida la segmentación y representación espectral usada por
+Medaiyese, Syed y Lauf, adaptada al análisis clásico desarrollado en este trabajo
+\cite{medaiyese}.
+
+Las predicciones de las ventanas se agregan primero por parte y después se combinan L/H
+con igual peso. Las métricas se calculan por grupo original, no por ventana. El umbral
+fondo/dron y los márgenes de rechazo se obtienen solamente con predicciones de grupos que
+quedaron fuera del ajuste correspondiente dentro del desarrollo.
+
+La decisión es jerárquica:
+
+\begin{enumerate}
+  \item fondo o actividad de dron;
+  \item si hay actividad, modelo Bebop, AR o Phantom;
+  \item para Bebop o AR, modo conectado, vuelo estacionario, vuelo o video.
+\end{enumerate}
+
+Si el margen entre las dos primeras hipótesis es pequeño se informa \emph{No concluyente}.
+Una etapa solo se considera informativa si supera la referencia en al menos cuatro de las
+cinco particiones de desarrollo y además conserva separabilidad en la evaluación reservada.
+Con este criterio, modelo y modos quedan deshabilitados y se informa \emph{No concluyente}.
+
+\section{Verificaciones sintéticas}
+
+Antes de analizar DroneRF se probaron las funciones con señales conocidas. Una senoidal de
+180 Hz muestreada a 2 kHz produjo un máximo de FFT exactamente en 180 Hz, con
+$\Delta f=1$ Hz.
+
+\figura{nb00_senoidal_fft.png}{FFT de una senoidal conocida. La frecuencia detectada coincide con la esperada.}{fig:fft_sintetica}
+
+El máximo de la FFT coincide con la frecuencia fijada al generar la senoidal. Este control
+permite comprobar que la construcción del eje frecuencial y el cálculo de $\Delta f$ son
+consistentes antes de aplicarlos a registros RF.
+
+En una suma de senoidales con ruido, el periodograma conserva una variación punto a punto
+mayor que Welch. Este resultado permite justificar por qué Welch se usa como estimador
+principal para las comparaciones reales.
+
+\figura{nb00_periodograma_vs_welch.png}{Periodograma y Welch sobre una señal sintética con componentes conocidas y ruido.}{fig:welch_sintetica}
+
+Las componentes conocidas se mantienen en ambas estimaciones, pero el periodograma muestra
+mayor variación entre bins. Welch conserva la ubicación de las componentes y suaviza esa
+variación mediante el promedio de tramos, por eso se adopta para las comparaciones reales.
+
+La comparación de ventanas muestra el compromiso esperado: la rectangular tiene mayor
+fuga espectral, mientras Hann, Hamming y Blackman reducen los lóbulos laterales con distintos
+anchos de lóbulo principal.
+
+\figura{nb00_ventanas_fuga_espectral.png}{Efecto del ventaneo sobre una componente que no coincide exactamente con un bin de la DFT.}{fig:ventanas}
+
+La ventana rectangular concentra un lóbulo principal más angosto, aunque deja lóbulos
+laterales más altos. Hann, Hamming y Blackman reducen esa energía lateral con un lóbulo
+principal más ancho, que es el compromiso que luego se verifica sobre señales DroneRF.
+
+También se verificaron aliasing al reducir $f_s$, mejora del error de cuantización al
+aumentar la cantidad de bits y pérdida de contraste espectral al disminuir la SNR. Estas
+pruebas controladas no reemplazan los datos reales: confirman que las funciones responden
+como se espera.
+
+\section{Análisis con DroneRF}
+
+\subsection{Tiempo, FFT y PSD}
+
+Para mantener la comparación estable se fijaron los grupos \path{dronerf_00000_0} y
+\path{dronerf_10000_0}, parte L. Para que un pico aislado no deje plana a la señal
+completa, cada vista general usa límites verticales robustos, dados por los percentiles
+0,5 y 99,5 del registro. Por eso esa escala permite leer la forma temporal, pero no
+comparar amplitudes entre paneles. El detalle corresponde, en cada caso, a la ventana de
+1024 muestras cuyo RMS queda más cerca de la mediana de las primeras veinte ventanas. De
+esta manera el zoom no se elige buscando manualmente un tramo llamativo.
+
+\figura[0.98]{nb02_tiempo_fondo_vs_dron.png}{Primeros 512 $\mu$s y ampliación reproducible de un registro de fondo y uno de Bebop conectado, ambos de la parte L. Los rectángulos marcan el intervalo ampliado.}{fig:tiempo}
+
+La forma local de las oscilaciones cambia entre los dos ejemplos y el zoom permite verla
+sin que la vista general quede dominada por un pico aislado. Al trabajar con una misma
+longitud de ventana se pueden comparar tramos temporales equivalentes antes de pasar al
+dominio frecuencial. Como las escalas generales son robustas e independientes, la amplitud
+se compara mediante RMS y pico, no por la altura de ambos paneles; una diferencia temporal
+aislada tampoco constituye por sí sola una regla general de detección.
+
+La FFT se calculó sobre $N=100\,000$ muestras con ventana Hann. Con
+$f_s=40$ MHz se obtiene $\Delta f=f_s/N=400$ Hz. Además del espectro completo se muestra
+la banda de 5 MHz con mayor diferencia de potencia relativa entre estos dos registros; en
+este caso, 10--15 MHz.
+
+\figura[0.98]{nb02_fft_fondo_vs_dron.png}{Magnitud de FFT completa y ampliación de la banda de 5 MHz con mayor diferencia relativa entre los ejemplos fijados.}{fig:fft_real}
+
+La FFT permite localizar componentes y comparar la forma de los dos espectros con una
+grilla de frecuencia conocida. La diferencia vertical global está influida por la
+normalización de cada registro por su máximo: expresa diferencias relativas de RMS y factor
+de cresta, no potencia RF absoluta ni ocupación exclusiva de una banda. Los máximos
+describen solamente el par graficado y no identifican por sí solos un dron.
+
+Welch se calculó con ventana Hann, \texttt{nperseg}=4096 y 50\% de solapamiento. Su grilla
+es de aproximadamente 9,77 kHz. Al promediar periodogramas, la curva es más estable que una
+única realización y facilita comparar la distribución relativa de potencia.
+
+\figura[0.98]{nb02_welch_fondo_vs_dron.png}{PSD relativa por Welch: nivel obtenido después de normalizar cada registro, forma espectral normalizada por área y ampliación de la banda seleccionada para la FFT.}{fig:welch_real}
+
+El promediado de Welch reduce la variación propia de un periodograma aislado y deja más
+visible la forma global de la PSD. En el notebook también se compara el periodograma real:
+conserva los mismos máximos principales, pero presenta más oscilaciones locales. La
+separación vertical entre las curvas se interpreta junto con la PSD normalizada por área y
+con las potencias relativas por bandas, ya que las señales fueron normalizadas por registro.
+
+Para revisar si el contenido frecuencial permanece constante, el registro de Bebop se
+dividió en cuatro tramos temporales de igual longitud y se calculó una FFT para cada uno.
+
+\figura[0.96]{nb02_fft_tramos_temporales.png}{Comparación del contenido espectral en cuatro tramos temporales consecutivos del mismo registro de Bebop conectado.}{fig:tramos_temporales}
+
+Los dos primeros tramos presentan menor nivel relativo que los dos últimos, aunque varios
+máximos aparecen en posiciones semejantes. Esto muestra que el registro no es perfectamente
+estacionario y justifica distribuir las ventanas a lo largo del archivo, en lugar de tomar
+solamente su comienzo.
+
+\subsection{Ventaneo real y relleno con ceros}
+
+El efecto de las ventanas también se evaluó sobre datos reales, usando la ventana L
+número 50 de las muestras excluidas \path{sin_dron/muestra_01.npz} y
+\path{phantom/conectado/muestra_01.npz}. Se compararon rectangular, Hann, Hamming y
+Blackman, corrigiendo la ganancia coherente para que la atenuación propia de cada ventana
+no se confunda con una diferencia de amplitud de la señal.
+
+\figura[0.98]{nb03_ventanas_dronerf.png}{Efecto del ventaneo sobre una ventana real de fondo y otra de Phantom conectado. La columna derecha amplía $\pm0,6$ MHz alrededor del máximo obtenido con Hann.}{fig:ventanas_reales}
+
+Las cuatro curvas conservan la estructura general, pero cambian la dispersión alrededor de
+los máximos y el ancho aparente de las componentes. Reducir la fuga espectral ensancha el
+lóbulo principal y aumenta el ancho de banda equivalente de ruido. Cuando varios máximos
+tienen magnitudes muy próximas, la posición del mayor puede cambiar con la ventana; por
+eso un pico aislado no se usa como identificador.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Métricas de las ventanas y posición del máximo en los dos ejemplos reales.}
+\begin{tabular}{llrrr}
+\toprule
+Muestra & Ventana & Gan. coh. & ENBW [bins] & $f_{\max}$ [MHz] \\
+\midrule
+Sin dron & Rectangular & 1,00 & 1,000 & 5,0000 \\
+Sin dron & Hann        & 0,50 & 1,500 & 5,0000 \\
+Sin dron & Hamming     & 0,54 & 1,363 & 5,0000 \\
+Sin dron & Blackman    & 0,42 & 1,727 & 10,6641 \\
+Phantom  & Rectangular & 1,00 & 1,000 & 19,4336 \\
+Phantom  & Hann        & 0,50 & 1,500 & 19,4238 \\
+Phantom  & Hamming     & 0,54 & 1,363 & 19,4238 \\
+Phantom  & Blackman    & 0,42 & 1,727 & 0,0684 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Para estudiar la representación gráfica se comparó una DFT de $N=1024$ muestras con una
+FFT de $N_{\mathrm{FFT}}=8192$. En ambos casos el tiempo observado es
+$N/f_s=25,6\,\mu$s. Sin relleno, la separación de la grilla es 39,06 kHz; con zero
+padding pasa a 4,88 kHz.
+
+\figura[0.98]{nb03_zero_padding.png}{Relleno con ceros sobre una senoidal fuera de bin y sobre el ejemplo Phantom. Se conservan las 1024 muestras y solo cambia la cantidad de puntos de la FFT.}{fig:zero_padding}
+
+La curva con 8192 puntos dibuja con más continuidad la forma del lóbulo y permite ubicar
+visualmente mejor su máximo. Agregar ceros interpola más puntos de la DTFT muestreada por
+la DFT, pero no aumenta el tiempo de observación ni la resolución física: dos componentes
+no separables con 1024 muestras siguen sin serlo después del relleno.
+
+\subsection{Potencia relativa por bandas}
+
+La integración en cuatro bandas de 5 MHz resume la forma de la PSD. Las dos muestras
+reparten potencia en todo el semiespectro y las diferencias entre estas bandas anchas son
+pequeñas. Por lo tanto, este resumen no separa las clases por sí solo; su utilidad es mostrar
+por qué la configuración cuantitativa combina veinte bandas de 1 MHz con otras
+características temporales y espectrales.
+
+\figura{nb03_potencia_relativa_bandas.png}{Potencia relativa mediana de 100 ventanas L de fondo y 100 de Phantom conectado en cuatro bandas de 5 MHz.}{fig:bandas}
+
+El resumen conserva diferencias entre zonas del espectro sin depender de un único máximo.
+Integrar la PSD transforma una curva de muchos puntos en porcentajes comparables. Una banda
+ancha puede ocultar componentes estrechas, por lo que el resultado depende de los bordes
+elegidos y se interpreta junto con la PSD completa.
+
+\subsection{Filtros FIR, IIR y Transformada Z}
+
+Se diseñó un FIR de orden 400 mediante ventana de Hamming y un IIR Butterworth de orden 8.
+Ambos son pasa banda entre 9,260 y 10,760 MHz, alrededor de una componente del ejemplo de
+dron. La banda sirve para estudiar el filtrado; no se presenta como banda universal de
+detección.
+
+\figura{nb04_respuesta_filtros.png}{Respuesta en frecuencia de los filtros FIR e IIR pasa banda.}{fig:filtros}
+
+Ambos filtros conservan la banda elegida y atenúan las regiones externas. El FIR de orden
+400 presenta una transición más abrupta y mayor atenuación fuera de banda. El IIR logra un
+pasabanda semejante con un orden mucho menor, aunque con una transición más gradual.
+
+El IIR posee radio máximo de polo 0,9562, menor que uno, por lo que es estable. La
+diferencia máxima entre evaluar $H(z)$ sobre el círculo unitario y usar
+\texttt{scipy.signal.freqz} fue $4,88\times10^{-13}$.
+
+\figura[0.68]{nb04_polos_ceros_iir.png}{Plano z del filtro IIR. Todos los polos se encuentran dentro del círculo unitario.}{fig:polos}
+
+Los polos quedan dentro del círculo unitario, por lo que el IIR causal es estable. Esta
+representación vincula el filtro aplicado en frecuencia con la expresión de $H(z)$ y con el
+criterio de estabilidad estudiado para sistemas discretos.
+
+\figura{nb04_psd_filtrada.png}{PSD del registro de dron antes y después de aplicar los filtros FIR e IIR pasa banda.}{fig:psd_filtrada}
+
+La proporción de potencia dentro de la banda elegida pasa de 0,344 en la entrada a 0,998
+con el FIR y 0,977 con el IIR. El filtrado se aplicó en ambos sentidos para evitar un
+corrimiento de fase durante el análisis de archivos guardados. Esta operación es no causal
+y se utiliza para comparar espectros fuera de línea; una implementación sobre hardware en
+tiempo real requeriría aplicar cada filtro en sentido directo y considerar su retardo.
+
+Los filtros se mantienen como análisis académico. No se incorporaron obligatoriamente al
+clasificador porque el objetivo era conservar características simples y evitar atribuir
+una mejora que no fuera estable en desarrollo.
+
+\section{Selección de configuración}
+
+Se compararon configuraciones predefinidas solamente con desarrollo. La prioridad fue la
+exactitud balanceada media de las etapas; ante diferencias menores a 0,02 se eligió menor
+dispersión y luego la opción más simple.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de sensibilidad de longitud y ventana.}
+\begin{tabular}{lrr}
+\toprule
+Configuración & Exactitud balanceada media & Dispersión media \\
+\midrule
+$N=256$, Hann & 0,558 & 0,053 \\
+$N=512$, Hann & 0,608 & 0,094 \\
+$N=1024$, Hann & 0,613 & 0,078 \\
+$N=2048$, Hann & 0,600 & 0,080 \\
+$N=512$, Hamming & 0,608 & 0,119 \\
+$N=512$, Blackman & 0,583 & 0,094 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+$N=1024$ alcanzó el mayor valor medio y redujo la dispersión respecto de la configuración
+de referencia $N=512$. Con $N=1024$, la comparación de 4, 10 y 20 bandas produjo valores medios 0,556,
+0,600 y 0,604 respectivamente; se eligieron 20 bandas por obtener el mayor valor medio y
+la menor dispersión entre las opciones cercanas.
+
+\figura{sensibilidad_configuraciones.png}{Comparación de longitudes de ventana y ventanas de análisis realizada únicamente con desarrollo.}{fig:sensibilidad_config}
+
+Las configuraciones producen diferencias moderadas en la exactitud balanceada media y en
+su dispersión entre particiones. La selección se hizo solamente con desarrollo, privilegiando
+$N=1024$ con ventana Hann por su equilibrio entre resultado medio y estabilidad, antes de
+consultar evaluación o muestras excluidas.
+
+Después de esta selección se fijaron las características, los modelos, los umbrales y los
+márgenes. Los grupos de evaluación y demostración no habilitaron nuevos ajustes.
+
+\section{Resultados de separabilidad}
+
+\subsection{Desarrollo y evaluación reservada}
+
+\begin{table}[H]
+\centering
+\caption{Exactitud balanceada por grupo en la jerarquía.}
+\begin{tabular}{lrrr}
+\toprule
+Etapa & Referencia & Desarrollo & Evaluación reservada \\
+\midrule
+Fondo / dron & 0,500 & 1,000 & 1,000 \\
+Modelo & 0,333 & 0,583 & 0,167 \\
+Modo Bebop & 0,250 & 0,250 & 0,000 \\
+Modo AR & 0,250 & 0,350 & 0,250 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\figura{03_resultados_jerarquia.png}{Separabilidad por nivel dentro del subconjunto DroneRF. Fondo/dron conserva el resultado en evaluación; modelo y modo no muestran el mismo comportamiento.}{fig:jerarquia}
+
+La diferencia entre la primera etapa y las siguientes es clara: fondo/dron se mantiene por
+encima de la referencia nula, mientras que modelo y modo no conservan el mismo comportamiento
+en evaluación. Por eso la aplicación utiliza la primera etapa como comprobación secundaria
+de separabilidad y detiene la interpretación jerárquica cuando no hay respaldo suficiente.
+
+La etapa fondo/dron alcanzó exactitud, exactitud balanceada, precisión, sensibilidad y F1 iguales
+a 1,000 en los 55 grupos de desarrollo evaluados fuera de su ajuste y en los 12 grupos reservados. Es un resultado del protocolo
+de laboratorio, no una prueba de generalización a otras capturas. En modelo, la cobertura
+diagnóstica de evaluación fue parcial y la exactitud balanceada 0,167. Modo Bebop quedó
+por debajo de la referencia y fue deshabilitado. Modo AR obtuvo 0,250, pero se calcula sobre solo
+cuatro grupos. Por esos resultados, la aplicación conservadora no habilita modelo ni modo.
+
+\subsection{Muestras excluidas del entrenamiento}
+
+Se construyeron doce paquetes NPZ desde los grupos reservados para demostración. Cada
+paquete contiene partes L/H y $f_s$; la etiqueta esperada se mantiene en un catálogo
+separado y se consulta después de inferir. Un test verifica que esa etiqueta no ingrese al
+detector.
+
+\begin{table}[H]
+\centering
+\caption{Resultados sobre muestras excluidas de entrenamiento y calibración.}
+\begin{tabular}{lrrr}
+\toprule
+Nivel & Exactitud balanceada & Cobertura & Grupos \\
+\midrule
+Fondo / dron & 1,000 & 1,000 & 12 \\
+Modelo & -- & 0,000 & 9 \\
+Modo & -- & 0,000 & 9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las muestras excluidas mantienen la decisión de actividad al procesar juntas sus partes L/H.
+La ausencia de una etiqueta de modelo o modo responde al criterio de no comunicar una
+identificación que la evaluación reservada no sostiene.
+
+En modelo y modo no corresponde calcular exactitud balanceada cuando la cobertura es cero:
+la aplicación no emitió etiquetas en esos niveles. El valor se muestra como ``--'' y no como
+un desempeño nulo, porque es una decisión deliberada de no extender la conclusión más allá
+de la evidencia reservada.
+
+Estas muestras nunca participaron en entrenamiento ni selección de parámetros. Sin
+embargo, sus etiquetas ya fueron reveladas en una pasada anterior, por lo que se las
+denomina \emph{muestras excluidas} y no validación ciega independiente.
+
+\subsection{Caso concreto: Phantom conectado}
+
+Para recorrer el sistema completo se eligió
+\path{muestras_demo/phantom/conectado/muestra_01.npz}. El programa leyó las partes L/H,
+generó ventanas, calculó características temporales y espectrales y ejecutó la jerarquía sin recibir la
+etiqueta esperada. Recién después de terminar la inferencia se consultó el archivo separado
+de etiquetas.
+
+\figura[0.98]{07_caso_phantom_analisis_aps.png}{Caso Phantom excluido: ventanas temporales L/H, FFT y PSD por Welch con ampliaciones sobre componentes relevantes.}{fig:caso_phantom_aps}
+
+L y H tienen escalas relativas diferentes, componentes distribuidas en todo el intervalo
+0--20 MHz y contrastes pico--piso de 2,82 y 3,26 dB. La combinación de ambas partes y de
+muchas ventanas aporta más información que una sola frecuencia dominante. El piso se
+calcula como la mediana de la PSD expresada en dB relativos, por lo que no es una medición
+de ruido físico ni una estimación de SNR.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de características del caso Phantom, agregado sobre las ventanas procesadas.}
+\begin{tabular}{lrrrrr}
+\toprule
+Parte & RMS & Pico & Factor de cresta & Centroide [MHz] & Ancho [MHz] \\
+\midrule
+L & $4,326\times10^{-4}$ & $1,636\times10^{-3}$ & 3,449 & 10,824 & 6,203 \\
+H & $3,322\times10^{-3}$ & $1,205\times10^{-2}$ & 3,353 & 10,657 & 6,230 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La decisión binaria produjo un puntaje relativo de 0,839 frente a un umbral calibrado de
+0,413, con margen 0,426. La hipótesis interna con mayor puntaje de modelo fue Phantom,
+pero la diferencia con la segunda fue solo 0,053 y la exactitud balanceada de modelo en la
+evaluación reservada fue 0,167. Por eso la aplicación no presenta modelo ni modo como
+identificación confirmada.
+
+\figura[0.98]{08_caso_phantom_decision.png}{Potencia relativa en 20 bandas y salida jerárquica obtenida sin consultar la etiqueta del caso Phantom.}{fig:caso_phantom_decision}
+
+La distribución por bandas y las características producen una salida de actividad de dron.
+Al abrir el catálogo después, la actividad coincide con la etiqueta reservada, mientras que
+modelo y modo quedan deliberadamente no concluyentes. El resultado surge de resumir
+información temporal y frecuencial, no de memorizar el nombre del archivo. Una hipótesis
+interna de Phantom no corrige el bajo desempeño global de la identificación de modelo.
+
+\subsection{Sensibilidad al ruido}
+
+Sobre las doce muestras se agregó ruido blanco con SNR relativa controlada después de la
+normalización y se repitió cinco veces por nivel. La exactitud balanceada promedio fue
+0,93 a 20 dB, 0,61 a 10 dB y entre 0,50 y 0,56 de -5 a 5 dB. No aparecieron falsas alarmas
+en estas perturbaciones, pero sí pérdidas de actividad: con ruido fuerte el detector deja
+de reconocer gran parte de los drones.
+
+La tendencia es consistente con una degradación al disminuir la SNR, aunque los pequeños
+cambios no deben sobreinterpretarse porque hay solo doce grupos y el ruido agregado no
+reproduce un canal RF completo. La cuantización relativa mostró un límite similar: a 8 y
+12 bits la exactitud balanceada fue 0,944 y 1,000, mientras que a 4 y 6 bits cayó a 0,500
+por pérdidas, sin falsas alarmas. No se interpreta como una especificación de ADC porque
+la perturbación se aplica sobre ventanas normalizadas.
+
+\subsection{Pruebas complementarias de estabilidad}
+
+Se repitió cinco veces una validación cruzada anidada por grupos. En cada partición externa,
+los grupos de prueba quedaron fuera del ajuste del clasificador y de la selección del
+umbral. La exactitud balanceada quedó entre 0,956 y 0,989; no hubo falsas alarmas en las
+50 exposiciones de fondo de esas repeticiones, aunque se perdieron entre uno y cuatro
+grupos de dron según la partición. Las repeticiones no son independientes entre sí, por lo
+que estos conteos describen estabilidad del protocolo y no una nueva población de señales.
+
+\figura[0.94]{09_auditoria_robustez_detector.png}{Pruebas complementarias sobre la etapa fondo/dron: particiones repetidas por grupos, etiquetas permutadas, ruido blanco y cuantización relativa.}{fig:robustez}
+
+La figura reúne controles que cambian la partición o la señal. La validación anidada repite
+la separación de grupos y vuelve a elegir el umbral sin usar el grupo externo. El control
+con etiquetas permutadas rompe deliberadamente la relación entre señal y clase: si el
+resultado permaneciera alto, indicaría que el procedimiento está aprovechando una
+estructura ajena a las etiquetas reales. Este control se repitió cien veces.
+
+Las cien permutaciones produjeron una exactitud balanceada media de 0,584 y un máximo de
+0,850, siempre por debajo del promedio real de 0,978. Con la corrección habitual
+$(k+1)/(M+1)$, donde $k$ es la cantidad de permutaciones que igualan o superan el resultado
+real y $M=100$, el valor empírico es 0,0099. Este control apoya que la separación observada
+no surge solamente del procedimiento de partición, aunque sigue limitado al subconjunto
+analizado. Cuatro tramos temporales separados mantuvieron exactitud balanceada
+1,000 con L/H presentes. En un diagnóstico inicial, al forzar el umbral calibrado con L/H
+sobre una única parte H, aparecieron dos falsas alarmas. Esa no es una salida permitida por
+la aplicación final: con la política vigente, L sola o H sola no emiten una decisión de
+actividad. La interfaz conserva sus gráficos y características, pero devuelve \emph{No
+concluyente} si no están juntas L y H.
+
+Se añadió un desafío negativo con cinco fondos de los segmentos 21--25 de DroneRF,
+extraídos después de fijar desarrollo, evaluación y demostración. Con los modelos y
+umbrales ya definidos, los cinco quedaron por debajo del umbral y no hubo falsas alarmas.
+Sumados a los tres fondos de la evaluación reservada, son ocho grupos del mismo dataset;
+este conteo no estima una tasa general de falsas alarmas para otros receptores o ambientes.
+
+Por último, se evaluó el sistema con seis controles sintéticos que no son registros DroneRF:
+ruido blanco, tonos, suma de tonos, modulación de amplitud y barrido lineal de frecuencia,
+todos con partes L/H simuladas. Algunos
+recibieron un puntaje lineal alto si se ignoraba el dominio de calibración. Por eso la
+aplicación compara la mediana de las características con el rango robusto aprendido solo
+en desarrollo. Los seis controles quedaron fuera de ese rango y retornaron
+\emph{No concluyente}. Este control no identifica la fuente desconocida ni convierte la
+señal en fondo: únicamente evita extender la decisión fondo/dron más allá de DroneRF.
+
+Como control adicional de calidad de entrada se usó el factor de cresta, que relaciona el
+pico de una ventana con su RMS. Su límite se calibró únicamente con las 55 agrupaciones de
+desarrollo: la mediana por parte no superó 3,572 y se fijó un límite conservador de 3,751.
+Los 55 grupos de desarrollo, los 12 de evaluación y las 12 muestras excluidas limpias
+quedaron dentro de ese rango. Luego, sin cambiar clasificador, umbral ni control de
+dominio, se inyectaron transitorios bipolares en 0,5\% de las muestras de las 12 entradas
+de demostración. En los 12 casos la aplicación devolvió \emph{No concluyente}; no hubo
+falsas alarmas, pero tampoco se intentó detectar los nueve drones presentes. Esta salida
+conservadora protege la demostración frente a un artefacto sintético fuerte, no demuestra
+inmunidad frente a interferencias reales.
+
+Los tonos añadidos conservan la decisión sobre estas muestras, mientras que los impulsos
+elevan el factor de cresta y activan el control de calidad. La salida no concluyente evita
+convertir un transitorio sintético intenso en una alarma, aunque también deja de emitir
+actividad para los drones afectados.
+
+\section{Aplicación interactiva}
+
+La aplicación se implementó con Gradio y funciona localmente sin conexión a internet. La
+primera pantalla es el instrumento de análisis: permite elegir una muestra de la biblioteca
+o arrastrar CSV, TXT, NPY, NPZ o MAT. Si el archivo no incluye metadatos se solicita $f_s$.
+
+El flujo es:
+
+\begin{center}
+archivo $\rightarrow$ lectura $\rightarrow$ normalización por registro $\rightarrow$ ventanas
+$\rightarrow$ características $\rightarrow$ modelos calibrados $\rightarrow$ interpretación.
+\end{center}
+
+La reproducción progresiva procesa ventanas en orden temporal y actualiza entre dos y
+cinco veces por segundo. Antes de iniciar esa secuencia, el archivo completo se centra y se
+normaliza por su máximo, igual que los registros de calibración. Por eso la progresión
+simula la entrega de bloques ya acondicionados y no un preprocesamiento causal a 40 MHz. Un
+sensor real requeriría una escala fija, normalización por bloques o control automático de
+ganancia y una nueva calibración.
+
+\figura{demo_phantom_conectado_1366x768.png}{Aplicación local después de analizar la muestra Phantom conectada, antes de mostrar la etiqueta esperada.}{fig:app}
+
+La interfaz concentra la señal temporal, el contenido espectral, la potencia por bandas y
+las características que intervienen en la decisión. La salida visible es actividad de dron;
+la identidad de la muestra se consulta por separado después del procesamiento para mantener
+el mismo recorrido que tendría un archivo cargado durante la demostración.
+
+La pantalla muestra señal temporal, FFT, Welch, potencia relativa por bandas, evolución
+del puntaje y tabla de características. El puntaje es relativo y no una probabilidad
+física. Si una etapa no tiene respaldo suficiente, la respuesta se detiene en el último
+nivel habilitado. La decisión de actividad requiere las partes L y H; un archivo con una
+sola parte queda como \emph{No concluyente} para evitar trasladar un umbral calibrado con
+ambas partes a una condición que mostró falsas alarmas.
+Además, si las características quedan fuera del intervalo robusto observado en desarrollo,
+se conservan las gráficas pero se devuelve \emph{No concluyente} antes de aplicar el
+puntaje de actividad. Esta precaución evita interpretar un archivo arbitrario como dron
+solo por el valor de un modelo lineal. Como control independiente, si la mediana del factor
+de cresta de L o H supera el rango visto en desarrollo, la aplicación también se detiene
+antes de decidir: interpreta esos transitorios como una entrada no apta para esta
+calibración, no como actividad de dron.
+
+\section{Discusión y limitaciones}
+
+El resultado más sólido es la diferencia fondo/dron dentro del subconjunto preparado. La
+PSD y la potencia por bandas muestran por qué las características espectrales aportan
+información. El análisis de filtros y Transformada Z completa los contenidos de Análisis y
+Procesamiento de Señales sin
+forzar el filtro dentro del detector.
+
+Las vistas completa y ampliada mejoran la lectura sin cambiar la evidencia. La selección
+determinística de ventanas y bandas evita elegir después de mirar el resultado. Del mismo
+modo, el relleno con ceros se presenta como una grilla espectral más densa y no como una mejora
+de resolución física.
+
+La identificación jerárquica también muestra un límite útil: obtener buena separación
+binaria no implica reconocer modelo y modo. Modelo cayó de 0,583 en desarrollo a 0,167 en
+evaluación, y los modos no superaron a la referencia. Conservar estos resultados evita inflar el
+desempeño y justifica la salida \emph{No concluyente}.
+
+Las principales limitaciones son:
+
+\begin{itemize}
+  \item 79 grupos provienen de un único dataset, sistema de adquisición y condiciones acotadas;
+  \item la evaluación reservada contiene solo 12 grupos;
+  \item las amplitudes normalizadas eliminan información absoluta y no hay calibración física;
+  \item no se evalúan otros sensores, ambientes, distancias ni interferencias reales;
+  \item el ruido sintético no modela por completo propagación, multitrayecto ni ocupación de canal;
+  \item a SNR relativa baja aparecen pérdidas de actividad, aunque no se observaron falsas alarmas en esa prueba acotada;
+  \item el umbral binario final requiere L y H; una parte aislada no se interpreta como decisión;
+  \item una señal fuera del dominio DroneRF solo puede rechazarse como \emph{No concluyente};
+        el control no identifica su fuente ni garantiza cobertura de interferencias reales;
+  \item transitorios sintéticos intensos se bloquean por factor de cresta y pueden producir
+        una pérdida deliberada de actividad; no se evaluaron transitorios de un receptor real;
+  \item las muestras de demo están excluidas del ajuste, pero ya no son ciegas en sentido estricto;
+  \item la aplicación reproduce archivos y no recibe una señal RF en tiempo real desde hardware.
+\end{itemize}
+
+Por estas razones no se extrapolan las métricas a un detector operacional. El trabajo
+demuestra un método reproducible y una simulación de laboratorio.
+
+\section{Reproducibilidad}
+
+El entorno probado usa Python 3.13.4 y dependencias registradas en
+\path{requirements-lock.txt}. Los datos pesados se mantienen fuera de Git y se localizan
+mediante \texttt{DATA\_DIR}; el manifiesto del dataset registra etiquetas, particiones,
+tamaños y hashes. Cada corrida guarda su configuración, las características calculadas,
+los modelos y las métricas. Los comandos completos de instalación, ejecución y verificación
+se encuentran en el README del repositorio público.
+
+Los notebooks 00--06 se ejecutan de arriba abajo y conservan sus salidas. Las pruebas
+automáticas controlan las dimensiones espectrales, estabilidad de filtros, conservación de
+potencia entre bandas, separación por grupos, ausencia de etiquetas durante la inferencia y
+compatibilidad entre características y modelos.
+
+\section{Conclusiones}
+
+El análisis temporal, la FFT y la PSD por Welch permitieron describir diferencias relativas
+entre fondo y actividad de dron. El ventaneo explicó el compromiso entre fuga y resolución,
+el relleno con ceros mejoró la lectura de los máximos sin añadir resolución física y los
+filtros FIR e IIR mostraron cómo aislar una banda y relacionarla con $H(z)$, polos, ceros y
+estabilidad.
+
+La validación por grupos sostuvo la separación fondo/dron dentro del subconjunto y del
+sistema de adquisición de DroneRF. El caso Phantom recorrió el procesamiento completo y
+produjo una decisión de actividad antes de consultar su etiqueta. La misma evidencia no
+alcanzó para identificar modelo y modo de manera confiable, por lo que la interfaz comunica
+una conclusión parcial en esos niveles.
+
+El trabajo aporta un flujo reproducible de laboratorio que une datos públicos,
+procesamiento clásico de señales, evaluación sin mezcla de registros y una aplicación para
+reproducir archivos previamente acondicionados. Para trasladarlo a una adquisición real
+serían necesarios otros receptores y ambientes, calibración física y un preprocesamiento
+causal compatible con el hardware.
+
+\begin{thebibliography}{9}
+\bibitem{alsaad}
+M. F. Al-Sa'd, A. Al-Ali, A. Mohamed, T. Khattab y A. Erbad,
+\emph{RF-based drone detection and identification using deep learning approaches: An initiative towards a large open source drone database},
+Future Generation Computer Systems, 2019.
+\url{https://doi.org/10.1016/j.future.2019.05.007}.
+
+\bibitem{dronerf}
+DroneRF dataset, Mendeley Data.
+\url{https://data.mendeley.com/datasets/f4c2b4n755/1}.
+
+\bibitem{codigo}
+Código asociado a DroneRF.
+\url{https://al-sad.github.io/DroneRF/}.
+
+\bibitem{medaiyese}
+O. O. Medaiyese, A. Syed y A. P. Lauf,
+\emph{Machine Learning Framework for RF-Based Drone Detection and Identification System},
+arXiv:2003.02656, 2020.
+\url{https://arxiv.org/abs/2003.02656}.
+
+\bibitem{oppenheim}
+A. V. Oppenheim y R. W. Schafer,
+\emph{Discrete-Time Signal Processing}, 3ra ed., Pearson, 2010.
+
+\bibitem{welch}
+P. D. Welch,
+\emph{The use of fast Fourier transform for the estimation of power spectra: A method based
+on time averaging over short, modified periodograms},
+IEEE Transactions on Audio and Electroacoustics, vol. 15, no. 2, pp. 70--73, 1967.
+
+\bibitem{harris}
+F. J. Harris,
+\emph{On the use of windows for harmonic analysis with the discrete Fourier transform},
+Proceedings of the IEEE, vol. 66, no. 1, pp. 51--83, 1978.
+\end{thebibliography}
+
+\end{document}

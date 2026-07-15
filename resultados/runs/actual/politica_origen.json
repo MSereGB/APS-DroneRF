@@ -1,0 +1,6 @@
+{
+  "run_id": "dronerf_demo_v2_final_n1024_hann_b20_seed42",
+  "bundle": "resultados/runs/dronerf_demo_v2_final_n1024_hann_b20_seed42/modelos/bundle_demo_conservador.joblib",
+  "bundle_sha256": "3e53a7d8ee387ee9c6f6331dfb427c023b6b044d69108501df51dec304248720",
+  "copied_at_utc": "2026-07-14T22:02:47+00:00"
+}

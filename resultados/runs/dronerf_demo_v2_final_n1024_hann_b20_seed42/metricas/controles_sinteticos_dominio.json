@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "executed_at_utc": "2026-07-14T22:21:25+00:00",
+  "purpose": "Control negativo fuera de DroneRF; no se usa para reentrenar.",
+  "bundle_sha256": "3e53a7d8ee387ee9c6f6331dfb427c023b6b044d69108501df51dec304248720",
+  "controls": 6,
+  "rejected_as_outside_domain": 6,
+  "drone_decisions": 0,
+  "rows": [
+    {
+      "control": "ruido_blanco",
+      "estado": "no_concluyente",
+      "puntaje_dron": 0.9986189462076382,
+      "distancia_dominio": 92.59219590490744,
+      "limite_dominio": 45.447869013059304,
+      "compatible": false
+    },
+    {
+      "control": "tono_1_mhz",
+      "estado": "no_concluyente",
+      "puntaje_dron": 1.0,
+      "distancia_dominio": 9122.256210569656,
+      "limite_dominio": 45.447869013059304,
+      "compatible": false
+    },
+    {
+      "control": "tono_10_5_mhz",
+      "estado": "no_concluyente",
+      "puntaje_dron": 5.402414352873031e-06,
+      "distancia_dominio": 10794.289373160163,
+      "limite_dominio": 45.447869013059304,
+      "compatible": false
+    },
+    {
+      "control": "dos_tonos",
+      "estado": "no_concluyente",
+      "puntaje_dron": 1.0,
+      "distancia_dominio": 5875.719055880181,
+      "limite_dominio": 45.447869013059304,
+      "compatible": false
+    },
+    {
+      "control": "am_10_5_mhz",
+      "estado": "no_concluyente",
+      "puntaje_dron": 1.8881267938031243e-08,
+      "distancia_dominio": 5124.877302854224,
+      "limite_dominio": 45.447869013059304,
+      "compatible": false
+    },
+    {
+      "control": "chirp_4_a_16_mhz",
+      "estado": "no_concluyente",
+      "puntaje_dron": 1.0,
+      "distancia_dominio": 7959.004747774468,
+      "limite_dominio": 45.447869013059304,
+      "compatible": false
+    }
+  ]
+}

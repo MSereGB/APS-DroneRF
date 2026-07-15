@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aps-drone-rf"
+version = "0.1.0"
+description = "Analisis APS de actividad de drones a partir de senales RF publicas y simulaciones."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "pyyaml",
+    "joblib",
+    "tqdm",
+    "gradio",
+    "ipykernel",
+    "reportlab",
+    "python-pptx",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+lint = ["ruff"]
+notebook = ["jupyter", "nbformat", "nbconvert"]
+docs = ["pypdf", "python-docx"]
+dev = ["pytest", "ruff", "jupyter", "nbformat", "nbconvert", "pypdf", "python-docx"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q --basetemp=.pytest-tmp"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]

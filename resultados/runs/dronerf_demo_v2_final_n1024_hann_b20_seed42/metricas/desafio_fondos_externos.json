@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "executed_at_utc": "2026-07-14T22:21:02+00:00",
+  "method": "Inferencia congelada sobre cinco pares de fondo extraídos de los segmentos 21-25; condición esperada agregada después de inferir.",
+  "bundle_sha256": "3e53a7d8ee387ee9c6f6331dfb427c023b6b044d69108501df51dec304248720",
+  "input_root": "C:\\Users\\msere\\Datos\\DroneRF_desafio_fondo_v1",
+  "n_background_groups": 5,
+  "false_alarm_count": 0,
+  "false_alarm_rate": 0.0,
+  "no_conclusive_count": 0,
+  "out_of_domain_count": 0,
+  "true_negative_count": 5,
+  "drone_score_min": 0.26572103312526585,
+  "drone_score_max": 0.3169760094500688
+}
